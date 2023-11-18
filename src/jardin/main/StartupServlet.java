@@ -19,7 +19,7 @@ public class StartupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void init() throws ServletException {
-		System.out.println("INIT STARTUP SERVLET JARDIN !!!!!!!!!!!");
+		System.out.println("INIT STARTUP SERVLET JARDIN2 !!!!!!!!!!!");
 		Properties p = null;
 		try {
 			p = Utils.load(FILE_PATH_PROPERTIES);
