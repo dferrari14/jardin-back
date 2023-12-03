@@ -41,6 +41,18 @@ public class LegumeApiImpl  extends UtilsResponse implements  LegumeApi{
 		}
  
 	}
+
+	@Override
+	public Response modifierLegume(BmLegume b) {
+		try {
+			Controle.controleLegume(b);
+			LegumeDao.modifierLegume(b);
+			return buildResponseUpdate();
+		}
+		catch (JardinException s) {
+			return buildResponse(s);
+		}
+	}
 	
 
 

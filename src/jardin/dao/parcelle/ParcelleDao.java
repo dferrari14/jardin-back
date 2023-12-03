@@ -28,7 +28,7 @@ public class ParcelleDao {
 
 		} catch (SQLException s) {
 			JardinException j = new JardinException();
-			j.setMessage("Erreur ajouterEnrichissement");
+			j.setMessage("Erreur ajouterParcelle");
 			j.setDetail(s.getMessage());
 			throw j;
 		}
@@ -49,7 +49,7 @@ public class ParcelleDao {
 
 		} catch (SQLException s) {
 			JardinException j = new JardinException();
-			j.setMessage("Erreur ajouterEnrichissement");
+			j.setMessage("Erreur modifierParcelle");
 			j.setDetail(s.getMessage());
 			throw j;
 		}

@@ -9,4 +9,5 @@ public interface LegumeApi {
 	public Response getUnLegume(int id);
 	public Response getLegumes();
 	public Response insererLegume(BmLegume b);
+	public Response modifierLegume(BmLegume b);
 }

@@ -8,12 +8,36 @@ import java.util.List;
 import jardin.constante.CsteDao;
 import jardin.dao.utils.CommonDao;
 import jardin.model.BmLegume;
+import jardin.model.BmParcelle;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
  
 
 public class LegumeDao {
 	//ECRITURE
+	public static void modifierLegume(BmLegume b) throws JardinException {
+		 
+		try {
+			String req = "update " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME;
+			req = req + " set ";
+			req = req + " " + CsteDao.COLUMN_NOM + " = '" + b.getNom() + "' , ";
+			req = req + " " + CsteDao.COLUMN_FAMILLE + " = '" +b.getFamille() + "' , ";
+			req = req + " " + CsteDao.COLUMN_TYPE + " = '" +b.getType() + "' , ";
+			req = req + " " + CsteDao.COLUMN_NB_ANNEE_ROTATION + " = " +b.getNbAnneeRotation() + " , ";
+			req = req + " " + CsteDao.COLUMN_EXPOSITION + " = '" +b.getExposition() + "' ";
+			req = req + " where " + CsteDao.COLUMN_ID_LEGUME + " = " + b.getIdLegume();
+
+			UtilsDao.executeUpdateQuery(req);
+
+		} catch (SQLException s) {
+			JardinException j = new JardinException();
+			j.setMessage("Erreur modifierLegume");
+			j.setDetail(s.getMessage());
+			throw j;
+		}
+
+	}
+	
 	public static void ajouterLegume(BmLegume b) throws JardinException {
 		try {
 			String req = "insert into " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME;
