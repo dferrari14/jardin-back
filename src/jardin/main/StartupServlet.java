@@ -2,6 +2,7 @@ package jardin.main;
 
 import java.io.IOException;
 import java.util.Properties;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
@@ -12,7 +13,7 @@ import jardin.technique.Utils;
  
 
 public class StartupServlet extends HttpServlet {
-	private final static String FILE_PATH_PROPERTIES = "..\\..\\..\\DAVID\\workspace\\jardin\\ressources\\application.properties";
+	private final static String FILE_PATH_PROPERTIES = "..\\..\\..\\DAVID\\workspace\\jardin-back\\ressources\\application.properties";
 
 	private static jardin.technique.Contexte contexte;
 

@@ -9,7 +9,6 @@ import jardin.constante.CsteDao;
 import jardin.model.BmVoisinageLegume;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
-import jardin.technique.UtilsDate;
 
 public class VoisinageLegumeDao {
 	// ECRITURE

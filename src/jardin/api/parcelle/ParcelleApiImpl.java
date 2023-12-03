@@ -41,6 +41,18 @@ public class ParcelleApiImpl  extends UtilsResponse implements  ParcelleApi{
 		}
  
 	}
+
+	@Override
+	public Response modifierParcelle(BmParcelle b) {
+		try {
+			Controle.controleParcelle(b);
+			ParcelleDao.modifierParcelle(b);
+			return buildResponseUpdate();
+		}
+		catch (JardinException s) {
+			return buildResponse(s);
+		}
+	}
 	
 
 

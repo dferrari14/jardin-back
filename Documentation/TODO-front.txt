@@ -1,0 +1,4 @@
+click sur une ligne legume ou  parcelle pour alimenter champs en modification
+-- PARCELLE ok (ATTENTE METHODE PUT BACK)
+rafrichir liste si ajout ou modif
+saisir toutes les parcelles et afficher dans la view jardin

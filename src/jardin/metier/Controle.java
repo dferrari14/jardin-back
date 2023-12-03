@@ -1,9 +1,11 @@
 package jardin.metier;
 
+import jardin.model.BmHistoCulture;
 import jardin.model.BmLegume;
 import jardin.model.BmParcelle;
 import jardin.technique.JardinException;
 import jardin.technique.Utils;
+import jardin.technique.UtilsDate;
 
 public class Controle {
 	//legume
@@ -18,10 +20,18 @@ public class Controle {
 	private static final String LONGUEUR_OBL = "longueur parcell obligatoire";
 	private static final String LARGEUR_OBL = "largeur parcelle obligatoire";
 	private static final String EXPOSITION_PARCELLE_OBL = "exposition parcelle obligatoire";
+	//histo culture
+	private static final String BEAN_HISTO_NULL = "bean histo null";
+	private static final String ID_PARCELLE_OBL = "id parcelle obl";
+	private static final String ID_LEGUME_OBL = "id legume obl";
+	private static final String DATE_DEBUT = "date debut histo";
+	private static final String DATE_FIN = "date fin histo";
+	private static final String ENCOMBREMENT_OBL = "ecombrement parcelle obligatoire";
+	private static final String DATE_FIN_HISTO_INF_DATE_DEBUT= "date fin histo inferieur à la date de debut";
 	
 	public static void controleLegume(BmLegume b) throws JardinException {
 		if( b == null) {
-			throw new JardinException(NOM_LEGUME_OBL);
+			throw new JardinException(BEAN_LEGUME_NULL);
 		}
 		
 		if(Utils.isNullOrEmpty(b.getNom())) {
@@ -39,6 +49,7 @@ public class Controle {
 		if(Utils.isNullOrEmpty(b.getExposition())) {
 			throw new JardinException(EXPOSITION_LEGUME_OBL);
 		}
+		
 	}
 	
 	public static void controleParcelle(BmParcelle b) throws JardinException {
@@ -61,5 +72,33 @@ public class Controle {
 		if(b.getLongueur() == 0){
 			throw new JardinException(LONGUEUR_OBL);
 		}
+	}
+	
+	public static void controleHistoCulture(BmHistoCulture b) throws JardinException {
+		if( b == null) {
+			throw new JardinException(BEAN_HISTO_NULL);
+		}
+	
+		if(b.getIdLegume() == 0) {
+			throw new JardinException(ID_LEGUME_OBL);
+		}
+		
+		if(b.getIdParcelle() == 0) {
+			throw new JardinException(ID_PARCELLE_OBL);
+		}
+		
+		ControleDate.controleDateAAAAMMJJ_OBL(b.getDateDebut(), DATE_DEBUT);
+		ControleDate.controleDateAAAAMMJJ_FAC(b.getDateFin(), DATE_FIN);
+		
+		if(Utils.isNullOrEmpty(b.getDateFin())) {
+			if(!UtilsDate.afterAAAAMMD2D1(b.getDateFin(), b.getDateDebut())) {
+				throw new JardinException(DATE_FIN_HISTO_INF_DATE_DEBUT);
+			}
+		}
+		
+		if(Utils.isNullOrEmpty(b.getEncombrement())) {
+			throw new JardinException(ENCOMBREMENT_OBL);
+		}
+			
 	}
 }

@@ -9,4 +9,5 @@ public interface ParcelleApi {
 	public Response getUneParcelle(int id);
 	public Response getParcelles();
 	public Response insererParcelle(BmParcelle b);
+	public Response modifierParcelle(BmParcelle b);
 }
