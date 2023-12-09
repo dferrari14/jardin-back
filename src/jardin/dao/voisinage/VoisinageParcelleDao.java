@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jardin.constante.CsteDao;
-import jardin.model.BmVoisinageParcelle;
+import jardin.model.dao.BmVoisinageParcelleDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
  
 
 public class VoisinageParcelleDao {
 	//ECRITURE
-	public static void ajouterVoisinageParcelle(BmVoisinageParcelle b) throws JardinException {
+	public static void ajouterVoisinageParcelle(BmVoisinageParcelleDao b) throws JardinException {
 		try {
 			String req = "insert into " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_VOISINAGE_PARCELLE;
 			req = req + " values (";
@@ -32,9 +32,9 @@ public class VoisinageParcelleDao {
 	}
 	
 	//LECTURE	
-	public static List<BmVoisinageParcelle> getListeVoisinageParcelle(int idParcelle) throws JardinException {
+	public static List<BmVoisinageParcelleDao> getListeVoisinageParcelle(int idParcelle) throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_VOISINAGE_PARCELLE;
-		List<BmVoisinageParcelle> l = new ArrayList<BmVoisinageParcelle>();
+		List<BmVoisinageParcelleDao> l = new ArrayList<BmVoisinageParcelleDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);
 
@@ -52,8 +52,8 @@ public class VoisinageParcelleDao {
 
 	 
 	
-	private static BmVoisinageParcelle getBmVoisinageParcelle(ResultSet r) throws SQLException {
-		BmVoisinageParcelle c = new BmVoisinageParcelle();
+	private static BmVoisinageParcelleDao getBmVoisinageParcelle(ResultSet r) throws SQLException {
+		BmVoisinageParcelleDao c = new BmVoisinageParcelleDao();
 		c.setIdParcelle(r.getInt(CsteDao.COLUMN_ID_PARCELLE));
 		c.setIdParcelleVoisinage(r.getInt(CsteDao.COLUMN_ID_PARCELLE_VOISINAGE));
 		

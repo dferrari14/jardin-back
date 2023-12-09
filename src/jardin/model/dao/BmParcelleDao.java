@@ -1,13 +1,13 @@
-package jardin.model;
+package jardin.model.dao;
 
-public class BmParcelle {
+public class BmParcelleDao {
 	private int idParcelle;
 	private String nom;
 	private double largeur;  
 	private double longueur;
 	private String exposition;  
 	
-	public BmParcelle() {
+	public BmParcelleDao() {
 		super();
 	}
 

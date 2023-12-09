@@ -1,13 +1,13 @@
-package jardin.model;
+package jardin.model.dao;
 
-public class BmSemis {
+public class BmSemisDao {
 	private int idLegume;
 	private int espacementLigneCm;
 	private int espacementPlantCm;
 	private String periode; 
 	private String remarque; 
 	
-	public BmSemis() {
+	public BmSemisDao() {
 		super();
 	}
 

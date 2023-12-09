@@ -9,14 +9,14 @@ import java.util.List;
 
 import jardin.constante.CsteDao;
 import jardin.dao.utils.CommonDao;
-import jardin.model.BmHistoCulture;
+import jardin.model.dao.BmHistoCultureDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
 import jardin.technique.UtilsDate;
 
 public class HistoCultureDao {
 	// ECRITURE
-	public static void ajouterHistoCulture(BmHistoCulture b) throws JardinException {
+	public static void ajouterHistoCulture(BmHistoCultureDao b) throws JardinException {
 
 		String req = "insert into " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE;
 		req = req + " values (";
@@ -58,9 +58,9 @@ public class HistoCultureDao {
 
 	// LECTURE
 
-	public static List<BmHistoCulture> getListeHistoCulture() throws JardinException {
+	public static List<BmHistoCultureDao> getListeHistoCulture() throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE;
-		List<BmHistoCulture> l = new ArrayList<BmHistoCulture>();
+		List<BmHistoCultureDao> l = new ArrayList<BmHistoCultureDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);
 
@@ -76,8 +76,8 @@ public class HistoCultureDao {
 		return l;
 	}
 
-	public static List<BmHistoCulture> getHistoCultureParcelle(int idParcelle) throws JardinException {
-		List<BmHistoCulture> l = new ArrayList<BmHistoCulture>();
+	public static List<BmHistoCultureDao> getHistoCultureParcelle(int idParcelle) throws JardinException {
+		List<BmHistoCultureDao> l = new ArrayList<BmHistoCultureDao>();
 
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE + " where "
 				+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle + UtilsDao.getOrderby(new HashMap<String, String>() {
@@ -100,8 +100,8 @@ public class HistoCultureDao {
 		return l;
 	}
 	
-	public static List<BmHistoCulture> getHistoCultureParcelleByDate(int idParcelle,Date date) throws JardinException {
-		List<BmHistoCulture> l = new ArrayList<BmHistoCulture>();
+	public static List<BmHistoCultureDao> getHistoCultureParcelleByDate(int idParcelle,Date date) throws JardinException {
+		List<BmHistoCultureDao> l = new ArrayList<BmHistoCultureDao>();
 
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE ;
 				req = req + " where " + CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle ;
@@ -127,8 +127,8 @@ public class HistoCultureDao {
 		return l;
 	}
 
-	public static List<BmHistoCulture> getHistoCultureLegume(int idLegume) throws JardinException {
-		List<BmHistoCulture> l = new ArrayList<BmHistoCulture>();
+	public static List<BmHistoCultureDao> getHistoCultureLegume(int idLegume) throws JardinException {
+		List<BmHistoCultureDao> l = new ArrayList<BmHistoCultureDao>();
 
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE + " where "
 				+ CsteDao.COLUMN_ID_LEGUME + " = " + idLegume;
@@ -147,8 +147,8 @@ public class HistoCultureDao {
 		return l;
 	}
 
-	private static BmHistoCulture getBmHistoCulture(ResultSet r) throws SQLException {
-		BmHistoCulture c = new BmHistoCulture();
+	private static BmHistoCultureDao getBmHistoCulture(ResultSet r) throws SQLException {
+		BmHistoCultureDao c = new BmHistoCultureDao();
 		c.setIdHisto(r.getInt(CsteDao.COLUMN_ID_HISTO));
 		c.setIdParcelle(r.getInt(CsteDao.COLUMN_ID_PARCELLE));
 		c.setIdLegume(r.getInt(CsteDao.COLUMN_ID_LEGUME));

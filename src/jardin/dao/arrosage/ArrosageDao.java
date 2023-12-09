@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jardin.constante.CsteDao;
-import jardin.model.BmArrosage;
+import jardin.model.dao.BmArrosageDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
  
 
 public class ArrosageDao {
 	//ECRITURE
-	public static void ajouterArrosage(BmArrosage b) throws JardinException {
+	public static void ajouterArrosage(BmArrosageDao b) throws JardinException {
 		try {
 			String req = "insert into " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_ARROSAGE;
 			req = req + " values (";
@@ -37,9 +37,9 @@ public class ArrosageDao {
 	
 	//LECTURE
 	
-	public static List<BmArrosage> getListeArrosages() throws JardinException {
+	public static List<BmArrosageDao> getListeArrosages() throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_ARROSAGE;
-		List<BmArrosage> l = new ArrayList<BmArrosage>();
+		List<BmArrosageDao> l = new ArrayList<BmArrosageDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);
 
@@ -55,7 +55,7 @@ public class ArrosageDao {
 		return l;
 	}
 
-	public static BmArrosage getArrosage(int idLegume) throws JardinException {
+	public static BmArrosageDao getArrosage(int idLegume) throws JardinException {
 		try {
 			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_ARROSAGE + " where "
 					+ CsteDao.COLUMN_ID_LEGUME + " = " + idLegume;
@@ -73,8 +73,8 @@ public class ArrosageDao {
 		return null;
 	}
 	
-	private static BmArrosage getBmArrosage(ResultSet r) throws SQLException {
-		BmArrosage c = new BmArrosage();
+	private static BmArrosageDao getBmArrosage(ResultSet r) throws SQLException {
+		BmArrosageDao c = new BmArrosageDao();
 		c.setIdLegume(r.getInt(CsteDao.COLUMN_ID_LEGUME));
 		c.setFrequence(r.getInt(CsteDao.COLUMN_FREQUENCE));
 		c.setUniteFrequence(r.getString(CsteDao.COLUMN_UNITE));

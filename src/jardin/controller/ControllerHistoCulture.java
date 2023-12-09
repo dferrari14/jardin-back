@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 
 import jardin.api.histo.HistoApi;
 import jardin.api.histo.HistoFactory;
-import jardin.model.BmHistoCulture;
+import jardin.model.dao.BmHistoCultureDao;
 
 
  //http://localhost:8080/jardin/api/jardin/legumes
@@ -35,7 +35,7 @@ public class ControllerHistoCulture {
 	@POST
     @Produces(MediaType.APPLICATION_JSON)
 	public  Response insertHistoCulture(
-			BmHistoCulture b) {
+			BmHistoCultureDao b) {
 		return m.insererHistoCulture(b);
 	}
 

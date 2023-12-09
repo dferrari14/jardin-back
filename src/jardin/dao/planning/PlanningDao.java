@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jardin.constante.CsteDao;
-import jardin.model.BmPlanning;
+import jardin.model.dao.BmPlanningDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
  
 
 public class PlanningDao {
 	//ECRITURE
-	public static void ajouterTachePlanning(BmPlanning b) throws JardinException {
+	public static void ajouterTachePlanning(BmPlanningDao b) throws JardinException {
 		try {
 			String req = "insert into " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_PLANNING;
 			req = req + " values (";
@@ -35,9 +35,9 @@ public class PlanningDao {
 	}
 	
 	//LECTURE
-	public static List<BmPlanning> getListePlanning() throws JardinException {
+	public static List<BmPlanningDao> getListePlanning() throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_PLANNING;
-		List<BmPlanning> l = new ArrayList<BmPlanning>();
+		List<BmPlanningDao> l = new ArrayList<BmPlanningDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);
 
@@ -54,10 +54,10 @@ public class PlanningDao {
 		return l;
 	}
 
-	public static List<BmPlanning> getPlanningParcelle(int idParcelle) throws JardinException {
+	public static List<BmPlanningDao> getPlanningParcelle(int idParcelle) throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_PARCELLE + " where "
 				+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle;
-		List<BmPlanning> l = new ArrayList<BmPlanning>();
+		List<BmPlanningDao> l = new ArrayList<BmPlanningDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);
 
@@ -74,8 +74,8 @@ public class PlanningDao {
 		return l;
 	}
 
-	private static BmPlanning getBmPlanning(ResultSet r) throws SQLException {
-		BmPlanning c = new BmPlanning();
+	private static BmPlanningDao getBmPlanning(ResultSet r) throws SQLException {
+		BmPlanningDao c = new BmPlanningDao();
 		c.setIdParcelle(r.getInt(CsteDao.COLUMN_ID_PARCELLE));
 		c.setDateDebut(r.getString(CsteDao.COLUMN_DATE_DEBUT));
 		c.setDateMax(r.getString(CsteDao.COLUMN_DATE_MAX));

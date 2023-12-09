@@ -1,6 +1,6 @@
-package jardin.model;
+package jardin.model.dao;
 
-public class BmHistoCulture {
+public class BmHistoCultureDao {
 	private int idHisto;
 	private int idParcelle;
 	private int idLegume;
@@ -10,7 +10,7 @@ public class BmHistoCulture {
 	private String observation;   
 	private String rendement;   
 	
-	public BmHistoCulture() {
+	public BmHistoCultureDao() {
 		super();
 	}
 

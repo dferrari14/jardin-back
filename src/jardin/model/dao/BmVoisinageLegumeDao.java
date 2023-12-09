@@ -1,12 +1,12 @@
-package jardin.model;
+package jardin.model.dao;
 
-public class BmVoisinageLegume {
+public class BmVoisinageLegumeDao {
 	private int idLegume;
 	private int idLegumeVoisinage;
 	private String description;
 	private String type; //ok ou ko 
 	
-	public BmVoisinageLegume() {
+	public BmVoisinageLegumeDao() {
 		super();
 	}
 

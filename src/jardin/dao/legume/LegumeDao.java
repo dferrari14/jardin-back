@@ -7,15 +7,14 @@ import java.util.List;
 
 import jardin.constante.CsteDao;
 import jardin.dao.utils.CommonDao;
-import jardin.model.BmLegume;
-import jardin.model.BmParcelle;
+import jardin.model.dao.BmLegumeDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
  
 
 public class LegumeDao {
 	//ECRITURE
-	public static void modifierLegume(BmLegume b) throws JardinException {
+	public static void modifierLegume(BmLegumeDao b) throws JardinException {
 		 
 		try {
 			String req = "update " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME;
@@ -38,7 +37,7 @@ public class LegumeDao {
 
 	}
 	
-	public static void ajouterLegume(BmLegume b) throws JardinException {
+	public static void ajouterLegume(BmLegumeDao b) throws JardinException {
 		try {
 			String req = "insert into " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME;
 			req = req + " values (";
@@ -62,9 +61,9 @@ public class LegumeDao {
 	
 	//LECTURE
 	
-	public static List<BmLegume> getListeLegumes() throws JardinException {
+	public static List<BmLegumeDao> getListeLegumes() throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME;
-		List<BmLegume> l = new ArrayList<BmLegume>();
+		List<BmLegumeDao> l = new ArrayList<BmLegumeDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);
 
@@ -81,7 +80,7 @@ public class LegumeDao {
 		return l;
 	}
 
-	public static BmLegume getLegume(int idLegume) throws JardinException {
+	public static BmLegumeDao getLegume(int idLegume) throws JardinException {
 		try {
 			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME + " where "
 					+ CsteDao.COLUMN_ID_LEGUME + " = " + idLegume;
@@ -100,8 +99,8 @@ public class LegumeDao {
 		throw new JardinException("legume avec id " + idLegume + " introuvable");
 	}
 	
-	public static List<BmLegume> getLegumes(String type) throws JardinException {
-		List<BmLegume> l = new ArrayList<BmLegume>();
+	public static List<BmLegumeDao> getLegumes(String type) throws JardinException {
+		List<BmLegumeDao> l = new ArrayList<BmLegumeDao>();
 		try {
 			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME + " where "
 					+ CsteDao.COLUMN_TYPE + " = " + type;
@@ -120,8 +119,8 @@ public class LegumeDao {
 		return l;
 	}
 	
-	private static BmLegume getBmLegume(ResultSet r) throws SQLException {
-		BmLegume c = new BmLegume();
+	private static BmLegumeDao getBmLegume(ResultSet r) throws SQLException {
+		BmLegumeDao c = new BmLegumeDao();
 		c.setIdLegume(r.getInt(CsteDao.COLUMN_ID_LEGUME));
 		c.setNom(r.getString(CsteDao.COLUMN_NOM));
 		c.setFamille(r.getString(CsteDao.COLUMN_FAMILLE));

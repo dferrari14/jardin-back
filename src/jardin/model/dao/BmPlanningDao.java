@@ -1,12 +1,12 @@
-package jardin.model;
+package jardin.model.dao;
 
-public class BmPlanning {
+public class BmPlanningDao {
 	private int idParcelle;
 	private String dateDebut;
 	private String dateMax;
 	private String tache;  
 	
-	public BmPlanning() {
+	public BmPlanningDao() {
 		super();
 	}
 

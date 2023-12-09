@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
-import jardin.model.BmLegume;
+import jardin.model.dao.BmLegumeDao;
 
 public class Utils {
 	public static Properties load(String filename) throws IOException, FileNotFoundException {
@@ -40,9 +40,9 @@ public class Utils {
 		return false;
 	}
 	
-	public static BmLegume getLegumeFromListe(List<BmLegume> l,int idLegume) throws JardinException{
+	public static BmLegumeDao getLegumeFromListe(List<BmLegumeDao> l,int idLegume) throws JardinException{
 		if(l != null) {
-			for(BmLegume b:l) {
+			for(BmLegumeDao b:l) {
 				if(b.getIdLegume() == idLegume) {
 					return b;
 				}

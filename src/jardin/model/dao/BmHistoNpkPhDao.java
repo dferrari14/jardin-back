@@ -1,6 +1,6 @@
-package jardin.model;
+package jardin.model.dao;
 
-public class BmHistoNpkPh {
+public class BmHistoNpkPhDao {
 	private int idParcelle;
 	private String dateReleve;
 	private double azote; 
@@ -8,7 +8,7 @@ public class BmHistoNpkPh {
 	private double phosphore; 
 	private double ph; 
 	
-	public BmHistoNpkPh() {
+	public BmHistoNpkPhDao() {
 		super();
 	}
 

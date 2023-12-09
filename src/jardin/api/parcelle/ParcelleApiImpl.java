@@ -4,7 +4,7 @@ import javax.ws.rs.core.Response;
 
 import jardin.dao.parcelle.ParcelleDao;
 import jardin.metier.Controle;
-import jardin.model.BmParcelle;
+import jardin.model.dao.BmParcelleDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsResponse;
 
@@ -30,7 +30,7 @@ public class ParcelleApiImpl  extends UtilsResponse implements  ParcelleApi{
 	}
 
 	@Override
-	public Response insererParcelle(BmParcelle b) {
+	public Response insererParcelle(BmParcelleDao b) {
 		try {
 			Controle.controleParcelle(b);
 			ParcelleDao.ajouterParcelle(b);
@@ -43,7 +43,7 @@ public class ParcelleApiImpl  extends UtilsResponse implements  ParcelleApi{
 	}
 
 	@Override
-	public Response modifierParcelle(BmParcelle b) {
+	public Response modifierParcelle(BmParcelleDao b) {
 		try {
 			Controle.controleParcelle(b);
 			ParcelleDao.modifierParcelle(b);

@@ -1,6 +1,6 @@
-package jardin.model;
+package jardin.model.dao;
 
-public class BmLegume {
+public class BmLegumeDao {
 	private int idLegume;
 	private String nom;
 	private String famille; //solanacée,crucifere
@@ -8,7 +8,7 @@ public class BmLegume {
 	private String exposition;
 	private int nbAnneeRotation; //ex 3ans entre chaque culture de poireau sur la meme parcelle
 	
-	public BmLegume() {
+	public BmLegumeDao() {
 		super();
 	}
 

@@ -1,13 +1,13 @@
-package jardin.model;
+package jardin.model.dao;
 
-public class BmArrosage {
+public class BmArrosageDao {
 	private int idLegume;
 	private int frequence;
 	private String uniteFrequence; //Jours ou Semaine
 	private String quantitee;  
 	private String description;
 	
-	public BmArrosage() {
+	public BmArrosageDao() {
 		super();
 	}
 

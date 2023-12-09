@@ -11,8 +11,7 @@ import javax.ws.rs.core.Response;
 
 import jardin.api.legume.LegumeApi;
 import jardin.api.legume.LegumeFactory;
-import jardin.model.BmLegume;
-import jardin.model.BmParcelle;
+import jardin.model.dao.BmLegumeDao;
 
 
  //http://localhost:8080/jardin/api/jardin/legumes
@@ -39,14 +38,14 @@ public class ControllerLegume {
 	@POST
     @Produces(MediaType.APPLICATION_JSON)
 	public  Response insertLegume(
-			BmLegume b) {
+			BmLegumeDao b) {
 		return m.insererLegume(b);
 	}
 
 	@PUT
     @Produces(MediaType.APPLICATION_JSON)
 	public  Response modifierParcelle(
-			BmLegume b) {
+			BmLegumeDao b) {
 		return m.modifierLegume(b);
 	}
 }

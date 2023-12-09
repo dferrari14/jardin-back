@@ -2,12 +2,12 @@ package jardin.api.parcelle;
 
 import javax.ws.rs.core.Response;
 
-import jardin.model.BmParcelle;
+import jardin.model.dao.BmParcelleDao;
 
 
 public interface ParcelleApi {
 	public Response getUneParcelle(int id);
 	public Response getParcelles();
-	public Response insererParcelle(BmParcelle b);
-	public Response modifierParcelle(BmParcelle b);
+	public Response insererParcelle(BmParcelleDao b);
+	public Response modifierParcelle(BmParcelleDao b);
 }

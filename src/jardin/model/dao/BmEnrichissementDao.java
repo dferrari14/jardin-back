@@ -1,12 +1,12 @@
-package jardin.model;
+package jardin.model.dao;
 
-public class BmEnrichissement {
+public class BmEnrichissementDao {
 	private int idParcelle;
 	private String engrais;
 	private String amendement;  
 	private String dateEnrichissement;  
 	
-	public BmEnrichissement() {
+	public BmEnrichissementDao() {
 		super();
 	}
 

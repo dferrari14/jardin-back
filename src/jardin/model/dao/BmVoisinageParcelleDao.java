@@ -1,10 +1,10 @@
-package jardin.model;
+package jardin.model.dao;
 
-public class BmVoisinageParcelle {
+public class BmVoisinageParcelleDao {
 	private int idParcelle;
 	private int idParcelleVoisinage;
 	 
-	public BmVoisinageParcelle() {
+	public BmVoisinageParcelleDao() {
 		super();
 	} 
 	 

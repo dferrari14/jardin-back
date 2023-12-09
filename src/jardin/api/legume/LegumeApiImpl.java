@@ -4,7 +4,7 @@ import javax.ws.rs.core.Response;
 
 import jardin.dao.legume.LegumeDao;
 import jardin.metier.Controle;
-import jardin.model.BmLegume;
+import jardin.model.dao.BmLegumeDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsResponse;
 
@@ -30,7 +30,7 @@ public class LegumeApiImpl  extends UtilsResponse implements  LegumeApi{
 	}
 
 	@Override
-	public Response insererLegume(BmLegume b) {
+	public Response insererLegume(BmLegumeDao b) {
 		try {
 			Controle.controleLegume(b);
 			LegumeDao.ajouterLegume(b);
@@ -43,7 +43,7 @@ public class LegumeApiImpl  extends UtilsResponse implements  LegumeApi{
 	}
 
 	@Override
-	public Response modifierLegume(BmLegume b) {
+	public Response modifierLegume(BmLegumeDao b) {
 		try {
 			Controle.controleLegume(b);
 			LegumeDao.modifierLegume(b);

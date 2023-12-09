@@ -4,7 +4,7 @@ import javax.ws.rs.core.Response;
 
 import jardin.dao.historique.HistoCultureDao;
 import jardin.metier.Controle;
-import jardin.model.BmHistoCulture;
+import jardin.model.dao.BmHistoCultureDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsResponse;
 
@@ -30,7 +30,7 @@ public class HistoApiImpl  extends UtilsResponse implements  HistoApi{
 //	}
 
 	@Override
-	public Response insererHistoCulture(BmHistoCulture b) {
+	public Response insererHistoCulture(BmHistoCultureDao b) {
 		try {
 			Controle.controleHistoCulture(b);
 			HistoCultureDao.ajouterHistoCulture(b);

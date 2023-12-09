@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jardin.constante.CsteDao;
-import jardin.model.BmHistoNpkPh;
+import jardin.model.dao.BmHistoNpkPhDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
  
 
 public class HistoNpkPhDao {
 	//ECRITURE
-	public static void ajouterHistoNpkPh(BmHistoNpkPh b) throws JardinException {
+	public static void ajouterHistoNpkPh(BmHistoNpkPhDao b) throws JardinException {
 		try {
 			String req = "insert into " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_NPK_PH;
 			req = req + " values (";
@@ -36,8 +36,8 @@ public class HistoNpkPhDao {
 	}
 	
 	//LECTURE
-	public static List<BmHistoNpkPh> getHistoNpkPhParcelle(int idParcelle) throws JardinException {
-		List<BmHistoNpkPh> l = new ArrayList<BmHistoNpkPh>();
+	public static List<BmHistoNpkPhDao> getHistoNpkPhParcelle(int idParcelle) throws JardinException {
+		List<BmHistoNpkPhDao> l = new ArrayList<BmHistoNpkPhDao>();
 		try {
 			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_NPK_PH + " where "
 					+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle;
@@ -55,8 +55,8 @@ public class HistoNpkPhDao {
 	}
 	
 	 
-	private static BmHistoNpkPh getBmHistoNpkPh(ResultSet r) throws SQLException {
-		BmHistoNpkPh c = new BmHistoNpkPh();
+	private static BmHistoNpkPhDao getBmHistoNpkPh(ResultSet r) throws SQLException {
+		BmHistoNpkPhDao c = new BmHistoNpkPhDao();
 		c.setIdParcelle(r.getInt(CsteDao.COLUMN_ID_PARCELLE));
 		c.setDateReleve(r.getString(CsteDao.COLUMN_DATE_RELEVE));
 		c.setAzote(r.getDouble(CsteDao.COLUMN_AZOTE));

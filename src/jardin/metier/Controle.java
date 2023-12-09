@@ -1,8 +1,8 @@
 package jardin.metier;
 
-import jardin.model.BmHistoCulture;
-import jardin.model.BmLegume;
-import jardin.model.BmParcelle;
+import jardin.model.dao.BmHistoCultureDao;
+import jardin.model.dao.BmLegumeDao;
+import jardin.model.dao.BmParcelleDao;
 import jardin.technique.JardinException;
 import jardin.technique.Utils;
 import jardin.technique.UtilsDate;
@@ -29,7 +29,7 @@ public class Controle {
 	private static final String ENCOMBREMENT_OBL = "ecombrement parcelle obligatoire";
 	private static final String DATE_FIN_HISTO_INF_DATE_DEBUT= "date fin histo inferieur à la date de debut";
 	
-	public static void controleLegume(BmLegume b) throws JardinException {
+	public static void controleLegume(BmLegumeDao b) throws JardinException {
 		if( b == null) {
 			throw new JardinException(BEAN_LEGUME_NULL);
 		}
@@ -52,7 +52,7 @@ public class Controle {
 		
 	}
 	
-	public static void controleParcelle(BmParcelle b) throws JardinException {
+	public static void controleParcelle(BmParcelleDao b) throws JardinException {
 		if( b == null) {
 			throw new JardinException(BEAN_PARCELLE_NULL);
 		}
@@ -74,7 +74,7 @@ public class Controle {
 		}
 	}
 	
-	public static void controleHistoCulture(BmHistoCulture b) throws JardinException {
+	public static void controleHistoCulture(BmHistoCultureDao b) throws JardinException {
 		if( b == null) {
 			throw new JardinException(BEAN_HISTO_NULL);
 		}

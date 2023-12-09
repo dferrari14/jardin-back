@@ -7,13 +7,13 @@ import java.util.List;
 
 import jardin.constante.CsteDao;
 import jardin.dao.utils.CommonDao;
-import jardin.model.BmParcelle;
+import jardin.model.dao.BmParcelleDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
 
 public class ParcelleDao {
 	// ECRITURE
-	public static void ajouterParcelle(BmParcelle b) throws JardinException {
+	public static void ajouterParcelle(BmParcelleDao b) throws JardinException {
 		try {
 			String req = "insert into " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_PARCELLE;
 			req = req + " values (";
@@ -34,7 +34,7 @@ public class ParcelleDao {
 		}
 	}
 
-	public static void modifierParcelle(BmParcelle b) throws JardinException {
+	public static void modifierParcelle(BmParcelleDao b) throws JardinException {
  
 		try {
 			String req = "update " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_PARCELLE;
@@ -57,9 +57,9 @@ public class ParcelleDao {
 	}
 
 	// LECTURE
-	public static List<BmParcelle> getListeParcelle() throws JardinException {
+	public static List<BmParcelleDao> getListeParcelle() throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_PARCELLE;
-		List<BmParcelle> l = new ArrayList<BmParcelle>();
+		List<BmParcelleDao> l = new ArrayList<BmParcelleDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);
 
@@ -76,7 +76,7 @@ public class ParcelleDao {
 		return l;
 	}
 
-	public static BmParcelle getParcelle(int idParcelle) throws JardinException {
+	public static BmParcelleDao getParcelle(int idParcelle) throws JardinException {
 		try {
 			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_PARCELLE + " where "
 					+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle;
@@ -95,8 +95,8 @@ public class ParcelleDao {
 		throw new JardinException("Parcelle avec id " + idParcelle + " introuvable");
 	}
 
-	private static BmParcelle getBmParcelle(ResultSet r) throws SQLException {
-		BmParcelle c = new BmParcelle();
+	private static BmParcelleDao getBmParcelle(ResultSet r) throws SQLException {
+		BmParcelleDao c = new BmParcelleDao();
 		c.setIdParcelle(r.getInt(CsteDao.COLUMN_ID_PARCELLE));
 		c.setNom(r.getString(CsteDao.COLUMN_NOM));
 		c.setLargeur(r.getDouble(CsteDao.COLUMN_LARGEUR));

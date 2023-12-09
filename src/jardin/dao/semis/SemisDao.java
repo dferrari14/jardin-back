@@ -4,14 +4,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import jardin.constante.CsteDao;
-import jardin.model.BmSemis;
+import jardin.model.dao.BmSemisDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
  
 
 public class SemisDao {
 	//ECRITURE
-	public static void c(BmSemis b) throws JardinException {
+	public static void c(BmSemisDao b) throws JardinException {
 		try {
 			String req = "insert into " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_SEMIS;
 			req = req + " values (";
@@ -34,7 +34,7 @@ public class SemisDao {
 	
 	//LECTURE
 
-	public static BmSemis getSemis(int idLegume) throws JardinException {
+	public static BmSemisDao getSemis(int idLegume) throws JardinException {
 		try {
 			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_SEMIS + " where "
 					+ CsteDao.COLUMN_ID_LEGUME + " = " + idLegume;
@@ -52,8 +52,8 @@ public class SemisDao {
 		return null;
 	}
 	
-	private static BmSemis getBmSemis(ResultSet r) throws SQLException {
-		BmSemis c = new BmSemis();
+	private static BmSemisDao getBmSemis(ResultSet r) throws SQLException {
+		BmSemisDao c = new BmSemisDao();
 		c.setIdLegume(r.getInt(CsteDao.COLUMN_ID_LEGUME));
 		c.setEspacementLigneCm(r.getInt(CsteDao.COLUMN_ESPACEMENT_LIGNE));
 		c.setEspacementPlantCm(r.getInt(CsteDao.COLUMN_ESPACEMENT_PLANT));

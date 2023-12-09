@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jardin.constante.CsteDao;
-import jardin.model.BmEnrichissement;
+import jardin.model.dao.BmEnrichissementDao;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
  
 
 public class EnrichissementDao {
 	//ECRITURE
-	public static void ajouterEnrichissement(BmEnrichissement b) throws JardinException {
+	public static void ajouterEnrichissement(BmEnrichissementDao b) throws JardinException {
 		try {
 			String req = "insert into " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_ENRICHISSEMENT;
 			req = req + " values (";
@@ -35,9 +35,9 @@ public class EnrichissementDao {
 	}
 	
 	//LECTURE
-	public static List<BmEnrichissement> getListeEnrichissement() throws JardinException {
+	public static List<BmEnrichissementDao> getListeEnrichissement() throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_ENRICHISSEMENT;
-		List<BmEnrichissement> l = new ArrayList<BmEnrichissement>();
+		List<BmEnrichissementDao> l = new ArrayList<BmEnrichissementDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);
 
@@ -54,7 +54,7 @@ public class EnrichissementDao {
 		return l;
 	}
 
-	public static BmEnrichissement getEnrichissement(int idParcelle) throws JardinException {
+	public static BmEnrichissementDao getEnrichissement(int idParcelle) throws JardinException {
 		try {
 			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_ENRICHISSEMENT + " where "
 					+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle;
@@ -72,8 +72,8 @@ public class EnrichissementDao {
 		return null;
 	}
 
-	private static BmEnrichissement getBmEnrichissement(ResultSet r) throws SQLException {
-		BmEnrichissement c = new BmEnrichissement();
+	private static BmEnrichissementDao getBmEnrichissement(ResultSet r) throws SQLException {
+		BmEnrichissementDao c = new BmEnrichissementDao();
 		c.setIdParcelle(r.getInt(CsteDao.COLUMN_ID_PARCELLE));
 		c.setEngrais(r.getString(CsteDao.COLUMN_ENGRAIS));
 		c.setAmendement(r.getString(CsteDao.COLUMN_AMENDEMENT));
