@@ -3,6 +3,7 @@ package jardin.dao.historique;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import jardin.constante.CsteDao;
@@ -36,18 +37,27 @@ public class HistoNpkPhDao {
 	}
 	
 	//LECTURE
-	public static List<BmHistoNpkPhDao> getHistoNpkPhParcelle(int idParcelle) throws JardinException {
+	public static List<BmHistoNpkPhDao> getHistoNpkPhParcelle(int idParcelle,int dateReleve) throws JardinException {
 		List<BmHistoNpkPhDao> l = new ArrayList<BmHistoNpkPhDao>();
 		try {
 			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_NPK_PH + " where "
-					+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle;
+					+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle ;
+			if(dateReleve > 0) {
+				req = req + " and " + CsteDao.COLUMN_DATE_RELEVE + " = " + dateReleve;
+			}
+			req = req +UtilsDao.getOrderby(new HashMap<String, String>() {
+				private static final long serialVersionUID = 1L;
+				{
+					put(CsteDao.COLUMN_DATE_RELEVE, CsteDao.ORDER_BY_DESC);
+				}
+			});
 			ResultSet r = UtilsDao.executeQuery(req);			
 			while (r.next()) {
 				l.add(getBmHistoNpkPh(r));
 			}
 		} catch (SQLException s) {
 			JardinException j = new JardinException();
-			j.setMessage("Erreur getHistoCultureParcelle");
+			j.setMessage("Erreur getHistoNpkPhParcelle");
 			j.setDetail(s.getMessage());
 			throw j;
 		}  

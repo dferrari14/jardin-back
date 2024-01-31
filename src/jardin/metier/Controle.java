@@ -1,6 +1,7 @@
 package jardin.metier;
 
 import jardin.model.dao.BmHistoCultureDao;
+import jardin.model.dao.BmHistoNpkPhDao;
 import jardin.model.dao.BmLegumeDao;
 import jardin.model.dao.BmParcelleDao;
 import jardin.technique.JardinException;
@@ -90,8 +91,8 @@ public class Controle {
 		ControleDate.controleDateAAAAMMJJ_OBL(b.getDateDebut(), DATE_DEBUT);
 		ControleDate.controleDateAAAAMMJJ_FAC(b.getDateFin(), DATE_FIN);
 		
-		if(Utils.isNullOrEmpty(b.getDateFin())) {
-			if(!UtilsDate.afterAAAAMMD2D1(b.getDateFin(), b.getDateDebut())) {
+		if(!Utils.isNullOrEmpty(b.getDateFin())) {
+			if(!UtilsDate.dateAfterD1D2(b.getDateFin(), b.getDateDebut())) {
 				throw new JardinException(DATE_FIN_HISTO_INF_DATE_DEBUT);
 			}
 		}
@@ -100,5 +101,18 @@ public class Controle {
 			throw new JardinException(ENCOMBREMENT_OBL);
 		}
 			
+	}
+	
+	public static void controleHistoNpkPh(BmHistoNpkPhDao b) throws JardinException {
+		if( b == null) {
+			throw new JardinException(BEAN_HISTO_NULL);
+		}
+	
+		if(b.getIdParcelle() == 0) {
+			throw new JardinException(ID_PARCELLE_OBL);
+		}
+		
+		ControleDate.controleDateAAAAMMJJ_OBL(b.getDateReleve(), DATE_DEBUT);
+ 	
 	}
 }

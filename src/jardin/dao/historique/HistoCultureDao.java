@@ -25,7 +25,7 @@ public class HistoCultureDao {
 		req = req + "'" + b.getIdLegume() + "',";
 		req = req + "'" + b.getEncombrement() + "',";
 		req = req + "'" + b.getDateDebut() + "',";
-		req = req + "'9991231',";
+		req = req +  "'" + b.getDateFin() + "',";
 		req = req + "'" + b.getObservation() + "',";
 		req = req + "'" + b.getRendement() + "'";
 		req = req + ")";

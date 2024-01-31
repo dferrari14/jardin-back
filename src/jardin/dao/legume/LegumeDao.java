@@ -63,6 +63,7 @@ public class LegumeDao {
 	
 	public static List<BmLegumeDao> getListeLegumes() throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME;
+		req = req  + " order by " + CsteDao.COLUMN_NOM + " asc";
 		List<BmLegumeDao> l = new ArrayList<BmLegumeDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);
