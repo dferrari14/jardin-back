@@ -36,6 +36,27 @@ public class HistoNpkPhDao {
 		} 
 	}
 	
+	public static void updateHistoNpkPh(BmHistoNpkPhDao b) throws JardinException {
+		try {
+			String req = "update " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_NPK_PH;
+			req = req + " set ";
+			req = req + " " + CsteDao.COLUMN_AZOTE + " = " + b.getAzote() + " , ";
+			req = req + " " + CsteDao.COLUMN_POTASSIUM + " = " +b.getPotassium() + " , ";
+			req = req + " " + CsteDao.COLUMN_PHOSPHORE + " = " +b.getPhosphore() + " , ";
+			req = req + " " + CsteDao.COLUMN_PH + " = " +b.getPh() ;
+			req = req + " where " + CsteDao.COLUMN_ID_PARCELLE + " = " + b.getIdParcelle();
+			req = req + " and  " + CsteDao.COLUMN_DATE_RELEVE + " = '" + b.getDateReleve()+"'";
+
+			UtilsDao.executeUpdateQuery(req);
+
+		} catch (SQLException s) {
+			JardinException j = new JardinException();
+			j.setMessage("Erreur ajouterHistoNpkPh");
+			j.setDetail(s.getMessage());
+			throw j;
+		}
+	}
+	
 	//LECTURE
 	public static List<BmHistoNpkPhDao> getHistoNpkPhParcelle(int idParcelle,int dateReleve) throws JardinException {
 		List<BmHistoNpkPhDao> l = new ArrayList<BmHistoNpkPhDao>();

@@ -45,10 +45,14 @@ public class HistoApiImpl  extends UtilsResponse implements  HistoApi{
 	}
 
 	@Override
-	public Response insererHistoNpkPh(BmHistoNpkPhDao b) {
+	public Response insererHistoNpkPh(BmHistoNpkPhDao b,boolean modif) {
 		try {
 			Controle.controleHistoNpkPh(b);
-			HistoNpkPhDao.ajouterHistoNpkPh(b);
+			if(modif) {
+				HistoNpkPhDao.updateHistoNpkPh(b);
+			}else {
+				HistoNpkPhDao.ajouterHistoNpkPh(b);
+			}
 			return buildResponseUpdate();
 		}
 		catch (JardinException s) {

@@ -21,8 +21,8 @@ public class ControllerHistoNpkPh {
 	@POST
     @Produces(MediaType.APPLICATION_JSON)
 	public  Response insererHistoNpkPh(
-			BmHistoNpkPhDao b) {
-		return m.insererHistoNpkPh(b);
+			BmHistoNpkPhDao b,@QueryParam("modif")boolean modif) {
+		return m.insererHistoNpkPh(b,modif);
 	}
 	
 	@Path("/{id}")
