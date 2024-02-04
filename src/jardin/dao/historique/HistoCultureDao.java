@@ -100,6 +100,26 @@ public class HistoCultureDao {
 		return l;
 	}
 	
+	public static BmHistoCultureDao getHistoCultureByIdHisto(int idHisto) throws JardinException {
+		List<BmHistoCultureDao> l = new ArrayList<BmHistoCultureDao>();
+
+		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE + " where "
+				+ CsteDao.COLUMN_ID_HISTO + " = " + idHisto ;
+		try {
+			ResultSet r = UtilsDao.executeQuery(req);
+			while (r.next()) {
+				return getBmHistoCulture(r);
+			}
+		} catch (SQLException s) {
+			JardinException j = new JardinException();
+			j.setMessage("Erreur getHistoCultureParcelle,req : " + req);
+			j.setDetail(s.getMessage());
+			throw j;
+		}
+		 
+		throw new JardinException("HistoCulture avec id " + idHisto + " introuvable");
+	}
+	
 	public static List<BmHistoCultureDao> getHistoCultureParcelleByDate(int idParcelle,Date date) throws JardinException {
 		List<BmHistoCultureDao> l = new ArrayList<BmHistoCultureDao>();
 

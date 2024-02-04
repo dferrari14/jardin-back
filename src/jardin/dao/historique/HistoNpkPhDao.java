@@ -58,6 +58,10 @@ public class HistoNpkPhDao {
 	}
 	
 	//LECTURE
+	public static List<BmHistoNpkPhDao> getHistoNpkPhParcelle(int idParcelle) throws JardinException {
+		return getHistoNpkPhParcelle(idParcelle,0);
+	}
+		
 	public static List<BmHistoNpkPhDao> getHistoNpkPhParcelle(int idParcelle,int dateReleve) throws JardinException {
 		List<BmHistoNpkPhDao> l = new ArrayList<BmHistoNpkPhDao>();
 		try {

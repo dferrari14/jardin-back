@@ -13,24 +13,6 @@ import jardin.technique.UtilsResponse;
 
 public class HistoApiImpl  extends UtilsResponse implements  HistoApi{
 
-//	@Override
-//	public Response getUnLegume(int id) {
-//			try {
-//				return buildResponse(LegumeDao.getLegume(id));
-//			} catch (JardinException e) {
-//				return buildResponse(e);
-//			}	 
-//	}
-//
-//	@Override
-//	public Response getLegumes() {
-//		try {
-//			return buildResponse(LegumeDao.getListeLegumes());
-//		} catch (JardinException e) {
-//			return buildResponse(e);
-//		}	
-//	}
-
 	@Override
 	public Response insererHistoCulture(BmHistoCultureDao b) {
 		try {
@@ -64,6 +46,15 @@ public class HistoApiImpl  extends UtilsResponse implements  HistoApi{
 	public Response getHistoNpkPh(int i,int dateReleve) {
 		try {
 			return buildResponse(HistoNpkPhDao.getHistoNpkPhParcelle(i,dateReleve));
+		} catch (JardinException e) {
+			return buildResponse(e);
+		}	 
+	}
+
+	@Override
+	public Response getHistoCultureByIdHisto(int idHisto) {
+		try {
+			return buildResponse(HistoCultureDao.getHistoCultureByIdHisto(idHisto));
 		} catch (JardinException e) {
 			return buildResponse(e);
 		}	 

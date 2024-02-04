@@ -55,7 +55,7 @@ public class PlanningDao {
 	}
 
 	public static List<BmPlanningDao> getPlanningParcelle(int idParcelle) throws JardinException {
-		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_PARCELLE + " where "
+		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_PLANNING + " where "
 				+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle;
 		List<BmPlanningDao> l = new ArrayList<BmPlanningDao>();
 		try {

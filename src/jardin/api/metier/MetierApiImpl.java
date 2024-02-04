@@ -6,10 +6,14 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 
 import jardin.dao.historique.HistoCultureDao;
+import jardin.dao.historique.HistoNpkPhDao;
 import jardin.dao.legume.LegumeDao;
 import jardin.dao.parcelle.ParcelleDao;
+import jardin.dao.planning.PlanningDao;
 import jardin.model.dao.BmHistoCultureDao;
+import jardin.model.dao.BmHistoNpkPhDao;
 import jardin.model.dao.BmParcelleDao;
+import jardin.model.dao.BmPlanningDao;
 import jardin.model.metier.BmHistoCultureMetier;
 import jardin.model.metier.BmParcelleMetier;
 import jardin.technique.JardinException;
@@ -39,13 +43,18 @@ public class MetierApiImpl  extends UtilsResponse implements  MetierApi{
 				lHistoMetier.add(unHCM);
 			}
 			
+			List<BmHistoNpkPhDao> lHistoNpk = HistoNpkPhDao.getHistoNpkPhParcelle(idParcelle);
+			List<BmPlanningDao> lPlanning = PlanningDao.getPlanningParcelle(idParcelle);
+			
 			BmParcelleMetier bm = new BmParcelleMetier();
 			bm.setIdParcelle(b.getIdParcelle());
 			bm.setLargeur(b.getLargeur());
 			bm.setLongueur(b.getLongueur());
 			bm.setNom(b.getNom());
-			
+			bm.setExposition(b.getExposition());
+			bm.setHistoNpkPh(lHistoNpk);
 			bm.setHistoCulture(lHistoMetier);
+			bm.setPlanning(lPlanning);
 				
 			return buildResponse(bm);
 		} catch (JardinException e) {
