@@ -11,7 +11,6 @@ import javax.ws.rs.core.Response;
 
 import jardin.api.histo.HistoApi;
 import jardin.api.histo.HistoFactory;
-import jardin.model.dao.BmHistoCultureDao;
 import jardin.model.dao.BmHistoNpkPhDao;
 
 @Path("histoNpkPh")

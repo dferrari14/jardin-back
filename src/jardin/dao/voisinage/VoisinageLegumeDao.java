@@ -3,11 +3,17 @@ package jardin.dao.voisinage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import jardin.constante.CsteDao;
+import jardin.dao.legume.LegumeDao;
+import jardin.model.dao.BmLegumeDao;
 import jardin.model.dao.BmVoisinageLegumeDao;
+import jardin.model.metier.BmDetailVoisinageLegumeMetier;
+import jardin.model.metier.BmVoisinageLegumeMetier;
 import jardin.technique.JardinException;
+import jardin.technique.Utils;
 import jardin.technique.UtilsDao;
 
 public class VoisinageLegumeDao {
@@ -30,6 +36,25 @@ public class VoisinageLegumeDao {
 			j.setDetail(s.getMessage());
 			throw j;
 		}
+		
+	}
+	
+	public static void updateDescriptionVoisinageCulture(BmVoisinageLegumeDao b) throws JardinException {
+		try {
+			String req = "update " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_VOISINAGE_CULTURE;
+			req = req + " set ";
+			req = req + " " + CsteDao.COLUMN_DESCRIPTION + " = " + b.getDescription();
+			req = req + " where " + CsteDao.COLUMN_ID_LEGUME + " = " + b.getIdLegume();
+			req = req + " and  " + CsteDao.COLUMN_ID_LEGUME_VOISINAGE + " = " + b.getIdLegumeVoisinage();
+
+			UtilsDao.executeUpdateQuery(req);
+
+		} catch (SQLException s) {
+			JardinException j = new JardinException();
+			j.setMessage("Erreur updateDescriptionVoisinageCulture");
+			j.setDetail(s.getMessage());
+			throw j;
+		}
 	}
 
 	// LECTURE
@@ -42,10 +67,35 @@ public class VoisinageLegumeDao {
 		return getListeVoisinageLegume(idLegume,CsteDao.COLUMN_TYPE_VOISINAGE_VALUE_KO);
 	}
 	
+	public static BmVoisinageLegumeMetier getListeVoisinageLegume(int idLegume) throws JardinException {
+		List<BmVoisinageLegumeDao> l =  getListeVoisinageLegume(idLegume,null);
+		BmVoisinageLegumeMetier b = new BmVoisinageLegumeMetier();
+		b.setIdLegume(idLegume);
+		for(BmVoisinageLegumeDao bv:l) {
+			BmDetailVoisinageLegumeMetier bdv = new BmDetailVoisinageLegumeMetier();
+			bdv.setIdLegumeVoisinage(bv.getIdLegumeVoisinage());
+			bdv.setType(bv.getType());
+			bdv.setDescription(bv.getDescription());
+			BmLegumeDao bl = LegumeDao.getLegume(bv.getIdLegumeVoisinage());
+			bdv.setNom(bl.getNom());
+			b.getListeLegumeVoisinage().add(bdv);
+		}
+			
+		return b;
+	}
+	
+	
 	public static List<BmVoisinageLegumeDao> getListeVoisinageLegume(int idLegume,String type) throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_VOISINAGE_CULTURE;
 		req = req + " where " + CsteDao.COLUMN_ID_LEGUME + " = " + idLegume;
-		req = req + " and " + CsteDao.COLUMN_TYPE + " = '" + type + "'";
+		if(!Utils.isNullOrEmpty(type)) {
+			req = req + " and " + CsteDao.COLUMN_TYPE + " = '" + type + "' " +UtilsDao.getOrderby(new HashMap<String, String>() {
+				private static final long serialVersionUID = 1L;
+				{
+					put(CsteDao.COLUMN_TYPE, CsteDao.ORDER_BY_DESC);
+				}
+			});
+		}
 		List<BmVoisinageLegumeDao> l = new ArrayList<BmVoisinageLegumeDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);

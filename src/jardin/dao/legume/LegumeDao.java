@@ -3,6 +3,7 @@ package jardin.dao.legume;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import jardin.constante.CsteDao;
@@ -63,7 +64,13 @@ public class LegumeDao {
 	
 	public static List<BmLegumeDao> getListeLegumes() throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME;
-		req = req  + " order by " + CsteDao.COLUMN_NOM + " asc";
+		req = req  + UtilsDao.getOrderby(new HashMap<String, String>() {
+			private static final long serialVersionUID = 1L;
+			{
+				put(CsteDao.COLUMN_TYPE, CsteDao.ORDER_BY_ASC);
+				put(CsteDao.COLUMN_NOM, CsteDao.ORDER_BY_ASC);
+			}
+		});
 		List<BmLegumeDao> l = new ArrayList<BmLegumeDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);

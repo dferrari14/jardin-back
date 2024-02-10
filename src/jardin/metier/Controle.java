@@ -4,6 +4,7 @@ import jardin.model.dao.BmHistoCultureDao;
 import jardin.model.dao.BmHistoNpkPhDao;
 import jardin.model.dao.BmLegumeDao;
 import jardin.model.dao.BmParcelleDao;
+import jardin.model.dao.BmVoisinageLegumeDao;
 import jardin.technique.JardinException;
 import jardin.technique.Utils;
 import jardin.technique.UtilsDate;
@@ -29,6 +30,10 @@ public class Controle {
 	private static final String DATE_FIN = "date fin histo";
 	private static final String ENCOMBREMENT_OBL = "ecombrement parcelle obligatoire";
 	private static final String DATE_FIN_HISTO_INF_DATE_DEBUT= "date fin histo inferieur à la date de debut";
+	//voisinage legume
+	private static final String BEAN_VOISINAGE_NULL = "bean histo null";
+	private static final String ID_LEGUME_VOISINAGE_OBL = "id legume voisinage obl";
+	private static final String TYPE_VOISINAGE_OBL = "type voisinage obligatoire";
 	
 	public static void controleLegume(BmLegumeDao b) throws JardinException {
 		if( b == null) {
@@ -113,6 +118,25 @@ public class Controle {
 		}
 		
 		ControleDate.controleDateAAAAMMJJ_OBL(b.getDateReleve(), DATE_DEBUT);
+ 	
+	}
+	
+	public static void controleVoisinageLegume(BmVoisinageLegumeDao b) throws JardinException {
+		if( b == null) {
+			throw new JardinException(BEAN_VOISINAGE_NULL);
+		}
+	
+		if(b.getIdLegume() == 0) {
+			throw new JardinException(ID_LEGUME_OBL);
+		}
+		
+		if(b.getIdLegumeVoisinage() == 0) {
+			throw new JardinException(ID_LEGUME_VOISINAGE_OBL);
+		}
+		
+		if(Utils.isNullOrEmpty(b.getType())) {
+			throw new JardinException(TYPE_VOISINAGE_OBL);
+		} 
  	
 	}
 }

@@ -37,10 +37,15 @@ public class UtilsDao {
 		String o = " order by ";
 		
 		Set<String> lKey = lKeyOrder.keySet();
-		
+		int nb = lKey.size();
+		int index = 0;
 		for(String k:lKey) {
 			String typeOrder = lKeyOrder.get(k);
-			o=o+k+" "+typeOrder+" ";
+			if(index != 0){
+				o=o+" , ";	
+			}
+			 o=o+k+" "+typeOrder+" ";
+			 index++;
 		}
 			
 		return o;
