@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import jardin.constante.CsteDao;
@@ -62,15 +63,20 @@ public class LegumeDao {
 	
 	//LECTURE
 	
-	public static List<BmLegumeDao> getListeLegumes() throws JardinException {
+	public static List<BmLegumeDao> getListeLegumes(boolean triType) throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME;
-		req = req  + UtilsDao.getOrderby(new HashMap<String, String>() {
+		req = req  + (triType?UtilsDao.getOrderby(new LinkedHashMap<String, String>() {
 			private static final long serialVersionUID = 1L;
 			{
 				put(CsteDao.COLUMN_TYPE, CsteDao.ORDER_BY_ASC);
 				put(CsteDao.COLUMN_NOM, CsteDao.ORDER_BY_ASC);
 			}
-		});
+		}):UtilsDao.getOrderby(new LinkedHashMap<String, String>() {
+			private static final long serialVersionUID = 1L;
+			{
+				put(CsteDao.COLUMN_NOM, CsteDao.ORDER_BY_ASC);
+			}
+		}));
 		List<BmLegumeDao> l = new ArrayList<BmLegumeDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);

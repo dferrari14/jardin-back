@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import jardin.constante.CsteDao;
@@ -39,11 +40,12 @@ public class VoisinageLegumeDao {
 		
 	}
 	
-	public static void updateDescriptionVoisinageCulture(BmVoisinageLegumeDao b) throws JardinException {
+	public static void updateVoisinageCulture(BmVoisinageLegumeDao b) throws JardinException {
 		try {
 			String req = "update " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_VOISINAGE_CULTURE;
 			req = req + " set ";
-			req = req + " " + CsteDao.COLUMN_DESCRIPTION + " = " + b.getDescription();
+			req = req + " " + CsteDao.COLUMN_TYPE + " = '" + b.getType()+"' , ";
+			req = req + " " + CsteDao.COLUMN_DESCRIPTION + " = '" + b.getDescription()+"' ";
 			req = req + " where " + CsteDao.COLUMN_ID_LEGUME + " = " + b.getIdLegume();
 			req = req + " and  " + CsteDao.COLUMN_ID_LEGUME_VOISINAGE + " = " + b.getIdLegumeVoisinage();
 
@@ -51,7 +53,7 @@ public class VoisinageLegumeDao {
 
 		} catch (SQLException s) {
 			JardinException j = new JardinException();
-			j.setMessage("Erreur updateDescriptionVoisinageCulture");
+			j.setMessage("Erreur updateVoisinageCulture");
 			j.setDetail(s.getMessage());
 			throw j;
 		}
@@ -86,16 +88,20 @@ public class VoisinageLegumeDao {
 	
 	
 	public static List<BmVoisinageLegumeDao> getListeVoisinageLegume(int idLegume,String type) throws JardinException {
-		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_VOISINAGE_CULTURE;
-		req = req + " where " + CsteDao.COLUMN_ID_LEGUME + " = " + idLegume;
+		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_VOISINAGE_CULTURE + " A, ";
+		req = req + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME + " B ";
+		req = req + " where A." + CsteDao.COLUMN_ID_LEGUME + " = " + idLegume;
+		req = req + " and A." + CsteDao.COLUMN_ID_LEGUME_VOISINAGE + " = B." + CsteDao.COLUMN_ID_LEGUME;
 		if(!Utils.isNullOrEmpty(type)) {
-			req = req + " and " + CsteDao.COLUMN_TYPE + " = '" + type + "' " +UtilsDao.getOrderby(new HashMap<String, String>() {
-				private static final long serialVersionUID = 1L;
-				{
-					put(CsteDao.COLUMN_TYPE, CsteDao.ORDER_BY_DESC);
-				}
-			});
+			req = req + " and A." + CsteDao.COLUMN_TYPE + " = '" + type + "' " ;
 		}
+		req = req+UtilsDao.getOrderby(new LinkedHashMap<String, String>() {
+			private static final long serialVersionUID = 1L;
+			{	
+				put("A."+CsteDao.COLUMN_TYPE, CsteDao.ORDER_BY_DESC);
+				put("B."+CsteDao.COLUMN_NOM, CsteDao.ORDER_BY_ASC);				
+			}
+		});
 		List<BmVoisinageLegumeDao> l = new ArrayList<BmVoisinageLegumeDao>();
 		try {
 			ResultSet r = UtilsDao.executeQuery(req);

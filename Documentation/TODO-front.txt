@@ -1,4 +1,1 @@
- 
--- PARCELLE ok (ATTENTE METHODE PUT BACK)
-rafraichir liste si ajout ou modif --> fonctionne sur ajout legume
- 
+ voir les rotations a eviter , exemple radis aprés choux

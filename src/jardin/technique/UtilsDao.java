@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Set;
 
 import jardin.main.StartupServlet;
@@ -33,7 +34,7 @@ public class UtilsDao {
 		return getStatement().executeUpdate(q);
 	}
 	
-	public static String getOrderby(HashMap<String, String> lKeyOrder) {
+	public static String getOrderby(LinkedHashMap<String, String> lKeyOrder) {
 		String o = " order by ";
 		
 		Set<String> lKey = lKeyOrder.keySet();

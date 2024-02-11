@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import jardin.constante.CsteDao;
@@ -70,7 +71,7 @@ public class HistoNpkPhDao {
 			if(dateReleve > 0) {
 				req = req + " and " + CsteDao.COLUMN_DATE_RELEVE + " = " + dateReleve;
 			}
-			req = req +UtilsDao.getOrderby(new HashMap<String, String>() {
+			req = req +UtilsDao.getOrderby(new LinkedHashMap<String, String>() {
 				private static final long serialVersionUID = 1L;
 				{
 					put(CsteDao.COLUMN_DATE_RELEVE, CsteDao.ORDER_BY_DESC);

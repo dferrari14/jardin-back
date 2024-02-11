@@ -21,9 +21,9 @@ public class LegumeApiImpl  extends UtilsResponse implements  LegumeApi{
 	}
 
 	@Override
-	public Response getLegumes() {
+	public Response getLegumes(boolean triType) {
 		try {
-			return buildResponse(LegumeDao.getListeLegumes());
+			return buildResponse(LegumeDao.getListeLegumes(triType));
 		} catch (JardinException e) {
 			return buildResponse(e);
 		}	
@@ -52,6 +52,12 @@ public class LegumeApiImpl  extends UtilsResponse implements  LegumeApi{
 		catch (JardinException s) {
 			return buildResponse(s);
 		}
+	}
+
+	@Override
+	public Response getLegumes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

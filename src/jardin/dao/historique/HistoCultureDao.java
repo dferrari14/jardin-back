@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import jardin.constante.CsteDao;
@@ -80,7 +81,7 @@ public class HistoCultureDao {
 		List<BmHistoCultureDao> l = new ArrayList<BmHistoCultureDao>();
 
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE + " where "
-				+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle + UtilsDao.getOrderby(new HashMap<String, String>() {
+				+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle + UtilsDao.getOrderby(new LinkedHashMap<String, String>() {
 					private static final long serialVersionUID = 1L;
 					{
 						put(CsteDao.COLUMN_DATE_FIN, CsteDao.ORDER_BY_DESC);
@@ -127,7 +128,7 @@ public class HistoCultureDao {
 				req = req + " where " + CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle ;
 				req = req + " and " + CsteDao.COLUMN_DATE_DEBUT + " <= " +UtilsDate.getAAAAMMJJ(date);
 				req = req + " and " + CsteDao.COLUMN_DATE_FIN + " >= "  +UtilsDate.getAAAAMMJJ(date);
-				req = req +UtilsDao.getOrderby(new HashMap<String, String>() {
+				req = req +UtilsDao.getOrderby(new LinkedHashMap<String, String>() {
 					private static final long serialVersionUID = 1L;
 					{
 						put(CsteDao.COLUMN_DATE_FIN, CsteDao.ORDER_BY_DESC);
