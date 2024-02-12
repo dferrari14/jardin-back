@@ -31,4 +31,12 @@ public class ControllerVoisinageLegume {
 			 @PathParam("id") int id) {
 		return m.getVoisinageLegume(id);
 	}
+	
+	@Path("/listeLegumeFiltre/{id}")
+	@GET
+    @Produces(MediaType.APPLICATION_JSON)
+	public  Response getListeLegumeFiltre(
+			 @PathParam("id") int id) {
+		return m.getListeLegumeVoisinageFiltre(id);
+	}
 }

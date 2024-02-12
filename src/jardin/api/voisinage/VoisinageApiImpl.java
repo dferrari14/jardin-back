@@ -1,12 +1,17 @@
 package jardin.api.voisinage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.Response;
 
+import jardin.dao.legume.LegumeDao;
 import jardin.dao.voisinage.VoisinageLegumeDao;
 import jardin.metier.Controle;
+import jardin.model.dao.BmLegumeDao;
 import jardin.model.dao.BmVoisinageLegumeDao;
+import jardin.model.metier.BmDetailVoisinageLegumeMetier;
+import jardin.model.metier.BmVoisinageLegumeMetier;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsResponse;
 
@@ -61,14 +66,34 @@ public class VoisinageApiImpl extends UtilsResponse implements VoisinageApi {
 			return buildResponse(e);
 		}
 	}
+	
+	@Override
+	public Response getListeLegumeVoisinageFiltre(int idLegume) {
+		//Recupere la liste des legumes pour voisinage non utilsée
+		//permet de filtrer la liste
+		try {
+			List<BmLegumeDao> lLeg = LegumeDao.getListeLegumes(false);
+			List<BmLegumeDao> lLegRet = new ArrayList<BmLegumeDao>();
+			
+			BmVoisinageLegumeMetier b =VoisinageLegumeDao.getListeVoisinageLegume(idLegume);
+			for(BmLegumeDao bld:lLeg) {
+				boolean trouve = false;
+				for(BmDetailVoisinageLegumeMetier bdvlg:b.getListeLegumeVoisinage()) {
+					if(bdvlg.getIdLegumeVoisinage() == bld.getIdLegume() || bld.getIdLegume() == idLegume) {
+						trouve = true;
+					}
+				}
+				if(!trouve) {
+					lLegRet.add(bld);
+				}
+			}
+			
+			return buildResponse(lLegRet);
+		} catch (JardinException e) {
+			return buildResponse(e);
+		}
+	}
 
-//	@Override
-//	public Response getHistoCultureByIdHisto(int idHisto) {
-//		try {
-//			return buildResponse(HistoCultureDao.getHistoCultureByIdHisto(idHisto));
-//		} catch (JardinException e) {
-//			return buildResponse(e);
-//		}	 
-//	}
+ 
 
 }

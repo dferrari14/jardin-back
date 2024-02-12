@@ -54,14 +54,4 @@ public class LegumeApiImpl  extends UtilsResponse implements  LegumeApi{
 		}
 	}
 
-	@Override
-	public Response getLegumes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
-
-
-
 }
