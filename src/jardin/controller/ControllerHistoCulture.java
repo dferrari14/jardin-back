@@ -2,6 +2,7 @@ package jardin.controller;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -21,6 +22,13 @@ public class ControllerHistoCulture {
 	public  Response insertHistoCulture(
 			BmHistoCultureDao b) {
 		return m.insererHistoCulture(b);
+	}
+	
+	@PUT
+    @Produces(MediaType.APPLICATION_JSON)
+	public  Response modifierHistoCulture(
+			BmHistoCultureDao b) {
+		return m.modifierHistoCulture(b);
 	}
 	
 	@Path("/{id}")

@@ -59,7 +59,13 @@ public class CsteDao {
 	public final static String TABLE_SEMIS = "histo_semis";
 	public final static String COLUMN_ESPACEMENT_LIGNE = "espaceLigneCm";
 	public final static String COLUMN_ESPACEMENT_PLANT = "espacePlantCm";
-	public final static String COLUMN_PERIODE = "periode";
+	public final static String COLUMN_PROFONDEUR = "profondeur";
+	public final static String COLUMN_DATE_MIN_SEMIS = "dateMinSemis";
+	public final static String COLUMN_DATE_MAX_SEMIS = "dateMaxSemis";
+	public final static String COLUMN_DATE_MIN_RECOLTE = "dateMinRecolte";
+	public final static String COLUMN_DATE_MAX_RECOLTE = "dateMaxRecolte";
+	public final static String COLUMN_TEMPERATURE_MIN_GERMINAISON = "temperatureMinGerminaison";
+	public final static String COLUMN_DUREE_GERMINAISON = "dureeGerminaison";
 	public final static String COLUMN_REMARQUE = "remarque";
 	
 	//TABLE PARCELLE
@@ -75,6 +81,5 @@ public class CsteDao {
 	//SQL
 	public final static String ORDER_BY_DESC = "desc";
 	public final static String ORDER_BY_ASC = "asc";
-	
  
 }

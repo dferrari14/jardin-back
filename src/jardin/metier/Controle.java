@@ -4,6 +4,7 @@ import jardin.model.dao.BmHistoCultureDao;
 import jardin.model.dao.BmHistoNpkPhDao;
 import jardin.model.dao.BmLegumeDao;
 import jardin.model.dao.BmParcelleDao;
+import jardin.model.dao.BmSemisDao;
 import jardin.model.dao.BmVoisinageLegumeDao;
 import jardin.technique.JardinException;
 import jardin.technique.Utils;
@@ -34,6 +35,13 @@ public class Controle {
 	private static final String BEAN_VOISINAGE_NULL = "bean histo null";
 	private static final String ID_LEGUME_VOISINAGE_OBL = "id legume voisinage obl";
 	private static final String TYPE_VOISINAGE_OBL = "type voisinage obligatoire";
+	//voisinage legume
+	private static final String BEAN_SEMIS_NULL = "bean semis null";
+	private static final String DATE_MIN_SEMIS = "date min semis";
+	private static final String DATE_MAX_SEMIS = "date max semis";
+	private static final String DATE_MIN_RECOLTE = "date min recolte";
+	private static final String DATE_MAX_RECOLTE = "date max recolte";
+ 
 	
 	public static void controleLegume(BmLegumeDao b) throws JardinException {
 		if( b == null) {
@@ -138,5 +146,16 @@ public class Controle {
 			throw new JardinException(TYPE_VOISINAGE_OBL);
 		} 
  	
+	}
+	
+	public static void controleSemis(BmSemisDao b) throws JardinException {
+		if( b == null) {
+			throw new JardinException(BEAN_SEMIS_NULL);
+		}
+	
+		if(b.getIdLegume() == 0) {
+			throw new JardinException(ID_LEGUME_OBL);
+		}
+		
 	}
 }

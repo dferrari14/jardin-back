@@ -25,6 +25,18 @@ public class HistoApiImpl  extends UtilsResponse implements  HistoApi{
 		}
  
 	}
+	
+	@Override
+	public Response modifierHistoCulture(BmHistoCultureDao b) {
+		try {
+			Controle.controleHistoCulture(b);
+			HistoCultureDao.updateHistoCulture(b);
+			return buildResponseUpdate();
+		}
+		catch (JardinException s) {
+			return buildResponse(s);
+		}
+	}
 
 	@Override
 	public Response insererHistoNpkPh(BmHistoNpkPhDao b,boolean modif) {
@@ -59,6 +71,8 @@ public class HistoApiImpl  extends UtilsResponse implements  HistoApi{
 			return buildResponse(e);
 		}	 
 	}
+
+	
 
 
 }

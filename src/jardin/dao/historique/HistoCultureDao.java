@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -41,11 +40,16 @@ public class HistoCultureDao {
 		}
 	}
 
-	public static void cloturerHistoCulture(int idHistoCulture, String dateFin) throws JardinException {
+	public static void updateHistoCulture(BmHistoCultureDao b) throws JardinException {
 
 		String req = "update " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE;
-		req = req + " set " + CsteDao.COLUMN_DATE_FIN + " ='" + dateFin + "' ";
-		req = req + " where " + CsteDao.COLUMN_ID_HISTO + " = " + idHistoCulture;
+		req = req + " set " + CsteDao.COLUMN_ID_LEGUME + " ='" + b.getIdLegume() + "' ,";
+		req = req + CsteDao.COLUMN_ENCOMBREMENT + " ='" + b.getEncombrement() + "' ,";
+		req = req + CsteDao.COLUMN_DATE_DEBUT + " ='" + b.getDateDebut() + "' ,";
+		req = req + CsteDao.COLUMN_DATE_FIN + " ='" + b.getDateFin() + "' ,";
+		req = req + CsteDao.COLUMN_OBSERVATION + " ='" + b.getObservation() + "' ,";
+		req = req + CsteDao.COLUMN_RENDEMENT + " ='" + b.getRendement() + "' ";
+		req = req + " where " + CsteDao.COLUMN_ID_HISTO + " = " + b.getIdHisto();
 		try {
 			UtilsDao.executeUpdateQuery(req);
 
@@ -102,8 +106,6 @@ public class HistoCultureDao {
 	}
 	
 	public static BmHistoCultureDao getHistoCultureByIdHisto(int idHisto) throws JardinException {
-		List<BmHistoCultureDao> l = new ArrayList<BmHistoCultureDao>();
-
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE + " where "
 				+ CsteDao.COLUMN_ID_HISTO + " = " + idHisto ;
 		try {
