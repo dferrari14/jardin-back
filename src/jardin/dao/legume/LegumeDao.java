@@ -60,7 +60,29 @@ public class LegumeDao {
 		} 
 	}
 	
-	//LECTURE
+	//LECTURE	
+	public static List<BmLegumeDao> getListeLegumesFiltreSemis() throws JardinException {
+		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME + " A ";
+		 	   req = req + "where not exists (select 0 from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_SEMIS + " B ";
+		 	   req = req + " WHERE B.idLegume = A.idLegume) ORDER BY A.nom";
+ 
+		List<BmLegumeDao> l = new ArrayList<BmLegumeDao>();
+		try {
+			ResultSet r = UtilsDao.executeQuery(req);
+
+			while (r.next()) {
+				l.add(getBmLegume(r));
+
+			}
+		} catch (SQLException s) {
+			JardinException j = new JardinException();
+			j.setMessage("Erreur getListeLegumes");
+			j.setDetail(s.getMessage());
+			throw j;
+		} 
+		return l;
+	}
+	
 	
 	public static List<BmLegumeDao> getListeLegumes(boolean triType) throws JardinException {
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME;

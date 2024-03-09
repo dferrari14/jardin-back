@@ -56,14 +56,14 @@ public class CsteDao {
 	public final static String COLUMN_ID_PARCELLE_VOISINAGE = "idParcelleVoisinage";
 	
 	//TABLE SEMIS
-	public final static String TABLE_SEMIS = "histo_semis";
-	public final static String COLUMN_ESPACEMENT_LIGNE = "espaceLigneCm";
-	public final static String COLUMN_ESPACEMENT_PLANT = "espacePlantCm";
+	public final static String TABLE_SEMIS = "semis";
+	public final static String COLUMN_ESPACEMENT_LIGNE = "espacementLigneCm";
+	public final static String COLUMN_ESPACEMENT_PLANT = "espacementPlantCm";
 	public final static String COLUMN_PROFONDEUR = "profondeur";
-	public final static String COLUMN_DATE_MIN_SEMIS = "dateMinSemis";
-	public final static String COLUMN_DATE_MAX_SEMIS = "dateMaxSemis";
-	public final static String COLUMN_DATE_MIN_RECOLTE = "dateMinRecolte";
-	public final static String COLUMN_DATE_MAX_RECOLTE = "dateMaxRecolte";
+	public final static String COLUMN_MOIS_MIN_SEMIS = "moisMinSemis";
+	public final static String COLUMN_MOIS_MAX_SEMIS = "moisMaxSemis";
+	public final static String COLUMN_MOIS_MIN_RECOLTE = "moisMinRecolte";
+	public final static String COLUMN_MOIS_MAX_RECOLTE = "moisMaxRecolte";
 	public final static String COLUMN_TEMPERATURE_MIN_GERMINAISON = "temperatureMinGerminaison";
 	public final static String COLUMN_DUREE_GERMINAISON = "dureeGerminaison";
 	public final static String COLUMN_REMARQUE = "remarque";

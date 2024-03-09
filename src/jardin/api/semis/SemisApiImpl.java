@@ -2,6 +2,7 @@ package jardin.api.semis;
 
 import javax.ws.rs.core.Response;
 
+import jardin.dao.legume.LegumeDao;
 import jardin.dao.semis.SemisDao;
 import jardin.metier.Controle;
 import jardin.model.dao.BmSemisDao;
@@ -32,6 +33,24 @@ public class SemisApiImpl extends UtilsResponse implements SemisApi {
 	public Response getSemis(int idLegume) {
 		try {
 			return buildResponse(SemisDao.getSemis(idLegume));
+		} catch (JardinException e) {
+			return buildResponse(e);
+		}
+	}
+
+	@Override
+	public Response getListeSemis() {
+		try {
+			return buildResponse(SemisDao.getListeSemis());
+		} catch (JardinException e) {
+			return buildResponse(e);
+		}
+	}
+
+	@Override
+	public Response getListeLegumeFiltre() {
+		try {
+			return buildResponse(LegumeDao.getListeLegumesFiltreSemis());
 		} catch (JardinException e) {
 			return buildResponse(e);
 		}

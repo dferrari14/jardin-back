@@ -2,6 +2,8 @@ package jardin.dao.semis;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import jardin.constante.CsteDao;
 import jardin.model.dao.BmSemisDao;
@@ -46,13 +48,13 @@ public class SemisDao {
 			req = req + " " + CsteDao.COLUMN_ESPACEMENT_LIGNE + " = " + b.getEspacementLigneCm() + " , ";
 			req = req + " " + CsteDao.COLUMN_ESPACEMENT_PLANT+ " = " +b.getEspacementPlantCm() + " , ";
 			req = req + " " + CsteDao.COLUMN_PROFONDEUR + " = " +b.getProfondeur() + " , ";
-			req = req + " " + CsteDao.COLUMN_DATE_MIN_SEMIS + " = " + b.getMoisMinSemis() + " , ";
-			req = req + " " + CsteDao.COLUMN_DATE_MAX_SEMIS + " = " +b.getMoisMaxSemis() + " , ";
-			req = req + " " + CsteDao.COLUMN_DATE_MIN_RECOLTE + " = " +b.getMoisMinRecolte() + " , ";
-			req = req + " " + CsteDao.COLUMN_DATE_MAX_RECOLTE + " = " +b.getMoisMaxRecolte() + " , ";
+			req = req + " " + CsteDao.COLUMN_MOIS_MIN_SEMIS + " = '" + b.getMoisMinSemis() + "' , ";
+			req = req + " " + CsteDao.COLUMN_MOIS_MAX_SEMIS + " = '" +b.getMoisMaxSemis() + "' , ";
+			req = req + " " + CsteDao.COLUMN_MOIS_MIN_RECOLTE + " = '" +b.getMoisMinRecolte() + "' , ";
+			req = req + " " + CsteDao.COLUMN_MOIS_MAX_RECOLTE + " = '" +b.getMoisMaxRecolte() + "' , ";
 			req = req + " " + CsteDao.COLUMN_TEMPERATURE_MIN_GERMINAISON + " = " +b.getTemperatureMinGerminaison() + " , ";
 			req = req + " " + CsteDao.COLUMN_DUREE_GERMINAISON + " = " +b.getDureeGerminaison() + " , ";
-			req = req + " " + CsteDao.COLUMN_REMARQUE + " = " +b.getRemarque() ;
+			req = req + " " + CsteDao.COLUMN_REMARQUE + " = '" +b.getRemarque() +"'" ;
 			req = req + " where " + CsteDao.COLUMN_ID_LEGUME + " = " + b.getIdLegume();
 
 			UtilsDao.executeUpdateQuery(req);
@@ -66,7 +68,26 @@ public class SemisDao {
 	}
 	
 	//LECTURE
+	public static List<BmSemisMetier> getListeSemis() throws JardinException {
+		List<BmSemisMetier> l = new ArrayList<BmSemisMetier>();
+		try {
+			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_SEMIS  + " A, ";
+			req = req + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME + " B ";
+			req = req + " where A."+CsteDao.COLUMN_ID_LEGUME + " =  B."+CsteDao.COLUMN_ID_LEGUME;
+			ResultSet r = UtilsDao.executeQuery(req);
 
+			while (r.next()) {
+				l.add(getBmSemis(r));
+			}
+		} catch (SQLException s) {
+			JardinException j = new JardinException();
+			j.setMessage("Erreur getListeSemis");
+			j.setDetail(s.getMessage());
+			throw j;
+		} 
+		return l;
+	}
+	
 	public static BmSemisDao getSemis(int idLegume) throws JardinException {
 		try {
 			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_SEMIS  + " A, ";
@@ -94,10 +115,10 @@ public class SemisDao {
 		c.setEspacementLigneCm(r.getInt(CsteDao.COLUMN_ESPACEMENT_LIGNE));
 		c.setEspacementPlantCm(r.getInt(CsteDao.COLUMN_ESPACEMENT_PLANT));
 		c.setProfondeur(r.getInt(CsteDao.COLUMN_PROFONDEUR));
-		c.setMoisMinSemis(r.getString(CsteDao.COLUMN_DATE_MIN_SEMIS));
-		c.setMoisMaxSemis(r.getString(CsteDao.COLUMN_DATE_MAX_SEMIS));
-		c.setMoisMinRecolte(r.getString(CsteDao.COLUMN_DATE_MIN_RECOLTE));
-		c.setMoisMaxRecolte(r.getString(CsteDao.COLUMN_DATE_MAX_RECOLTE));
+		c.setMoisMinSemis(r.getString(CsteDao.COLUMN_MOIS_MIN_SEMIS));
+		c.setMoisMaxSemis(r.getString(CsteDao.COLUMN_MOIS_MAX_SEMIS));
+		c.setMoisMinRecolte(r.getString(CsteDao.COLUMN_MOIS_MIN_RECOLTE));
+		c.setMoisMaxRecolte(r.getString(CsteDao.COLUMN_MOIS_MAX_RECOLTE));
 		c.setTemperatureMinGerminaison(r.getInt(CsteDao.COLUMN_TEMPERATURE_MIN_GERMINAISON));
 		c.setDureeGerminaison(r.getInt(CsteDao.COLUMN_DUREE_GERMINAISON));
 		c.setRemarque(r.getString(CsteDao.COLUMN_REMARQUE));

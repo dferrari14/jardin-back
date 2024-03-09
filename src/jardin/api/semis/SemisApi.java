@@ -8,4 +8,6 @@ import jardin.model.dao.BmSemisDao;
 public interface SemisApi {
 	public Response insererOuModifierSemis(BmSemisDao b,boolean ajout);
 	public Response getSemis(int idLegume);
+	public Response getListeSemis();
+	public Response getListeLegumeFiltre();
 }

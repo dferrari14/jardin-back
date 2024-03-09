@@ -37,10 +37,6 @@ public class Controle {
 	private static final String TYPE_VOISINAGE_OBL = "type voisinage obligatoire";
 	//voisinage legume
 	private static final String BEAN_SEMIS_NULL = "bean semis null";
-	private static final String DATE_MIN_SEMIS = "date min semis";
-	private static final String DATE_MAX_SEMIS = "date max semis";
-	private static final String DATE_MIN_RECOLTE = "date min recolte";
-	private static final String DATE_MAX_RECOLTE = "date max recolte";
  
 	
 	public static void controleLegume(BmLegumeDao b) throws JardinException {
@@ -101,10 +97,11 @@ public class Controle {
 			throw new JardinException(ID_PARCELLE_OBL);
 		}
 		
-		ControleDate.controleDateAAAAMMJJ_OBL(b.getDateDebut(), DATE_DEBUT);
+		//date debut fac quan don prevoit une culture on ne connait pas la date de debut
+		ControleDate.controleDateAAAAMMJJ_FAC(b.getDateDebut(), DATE_DEBUT);
 		ControleDate.controleDateAAAAMMJJ_FAC(b.getDateFin(), DATE_FIN);
 		
-		if(!Utils.isNullOrEmpty(b.getDateFin())) {
+		if(!Utils.isNullOrEmpty(b.getDateFin()) && !Utils.isNullOrEmpty(b.getDateDebut())) {
 			if(!UtilsDate.dateAfterD1D2(b.getDateFin(), b.getDateDebut())) {
 				throw new JardinException(DATE_FIN_HISTO_INF_DATE_DEBUT);
 			}

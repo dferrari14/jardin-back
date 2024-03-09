@@ -83,9 +83,46 @@ public class HistoCultureDao {
 
 	public static List<BmHistoCultureDao> getHistoCultureParcelle(int idParcelle) throws JardinException {
 		List<BmHistoCultureDao> l = new ArrayList<BmHistoCultureDao>();
-
+		//culture future   (pas encore de date de debut ni de fin)
 		String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE + " where "
-				+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle + UtilsDao.getOrderby(new LinkedHashMap<String, String>() {
+				+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle 
+				+ " and " + CsteDao.COLUMN_DATE_DEBUT + " = ''"
+				+ " and " + CsteDao.COLUMN_DATE_FIN + " = ''";
+		try {
+			ResultSet r = UtilsDao.executeQuery(req);
+			while (r.next()) {
+				l.add(getBmHistoCulture(r));
+			}
+		} catch (SQLException s) {
+			JardinException j = new JardinException();
+			j.setMessage("Erreur getHistoCultureParcelle,req : " + req);
+			j.setDetail(s.getMessage());
+			throw j;
+		}
+		
+		//culture  en cours (date de debut present mais pas encore de date de fin)
+		req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE + " where "
+				+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle 
+				+ " and " + CsteDao.COLUMN_DATE_DEBUT + " != ''"
+				+ " and " + CsteDao.COLUMN_DATE_FIN + " = ''";
+		try {
+			ResultSet r = UtilsDao.executeQuery(req);
+			while (r.next()) {
+				l.add(getBmHistoCulture(r));
+			}
+		} catch (SQLException s) {
+			JardinException j = new JardinException();
+			j.setMessage("Erreur getHistoCultureParcelle,req : " + req);
+			j.setDetail(s.getMessage());
+			throw j;
+		}
+		
+ 
+
+		 req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE + " where "
+				+ CsteDao.COLUMN_ID_PARCELLE + " = " + idParcelle 
+				+ " and " + CsteDao.COLUMN_DATE_FIN + " != ''"
+				+ UtilsDao.getOrderby(new LinkedHashMap<String, String>() {
 					private static final long serialVersionUID = 1L;
 					{
 						put(CsteDao.COLUMN_DATE_FIN, CsteDao.ORDER_BY_DESC);
