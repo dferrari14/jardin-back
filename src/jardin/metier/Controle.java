@@ -1,5 +1,6 @@
 package jardin.metier;
 
+import jardin.constante.CsteJardin;
 import jardin.model.dao.BmHistoCultureDao;
 import jardin.model.dao.BmHistoNpkPhDao;
 import jardin.model.dao.BmLegumeDao;
@@ -29,7 +30,8 @@ public class Controle {
 	private static final String ID_LEGUME_OBL = "id legume obl";
 	private static final String DATE_DEBUT = "date debut histo";
 	private static final String DATE_FIN = "date fin histo";
-	private static final String ENCOMBREMENT_OBL = "ecombrement parcelle obligatoire";
+	private static final String ENCOMBREMENT_OBL = "encombrement parcelle obligatoire";
+	private static final String TYPE_CULTURE_OBL = "Type culture (semis/terre) obligatoire";
 	private static final String DATE_FIN_HISTO_INF_DATE_DEBUT= "date fin histo inferieur à la date de debut";
 	//voisinage legume
 	private static final String BEAN_VOISINAGE_NULL = "bean histo null";
@@ -107,7 +109,11 @@ public class Controle {
 			}
 		}
 		
-		if(Utils.isNullOrEmpty(b.getEncombrement())) {
+		if(Utils.isNullOrEmpty(b.getType())) {
+			throw new JardinException(TYPE_CULTURE_OBL);
+		}
+		
+		if(!b.getType().equalsIgnoreCase(CsteJardin.TYPE_CULTURE_SEMIS) &&  Utils.isNullOrEmpty(b.getEncombrement())) {
 			throw new JardinException(ENCOMBREMENT_OBL);
 		}
 			

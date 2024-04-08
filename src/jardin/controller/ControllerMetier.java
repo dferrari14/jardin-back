@@ -16,6 +16,12 @@ import jardin.api.metier.MetierFactory;
 public class ControllerMetier {
 	private MetierApi m = MetierFactory.getInstance();
 	
+	@Path("planning")
+	@GET
+    @Produces(MediaType.APPLICATION_JSON)
+	public  Response getPlanning() {
+		return m.getPlanning();
+	}
 	 
 
 	@Path("parcelle/{id}")
@@ -24,6 +30,13 @@ public class ControllerMetier {
 	public  Response getUneParcelle(
 			 @PathParam("id") int id) {
 		return m.getMetierParcelle(id);
+	}
+	
+	@Path("parcelles")
+	@GET
+    @Produces(MediaType.APPLICATION_JSON)
+	public  Response getMetierParcelles() {
+		return m.getMetierParcelles();
 	}
 	
  

@@ -7,7 +7,7 @@ import java.util.List;
 
 import jardin.constante.CsteDao;
 import jardin.model.dao.BmSemisDao;
-import jardin.model.metier.BmSemisMetier;
+import jardin.model.metier.BmMetierSemis;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsDao;
  
@@ -68,8 +68,8 @@ public class SemisDao {
 	}
 	
 	//LECTURE
-	public static List<BmSemisMetier> getListeSemis() throws JardinException {
-		List<BmSemisMetier> l = new ArrayList<BmSemisMetier>();
+	public static List<BmMetierSemis> getListeSemis() throws JardinException {
+		List<BmMetierSemis> l = new ArrayList<BmMetierSemis>();
 		try {
 			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_SEMIS  + " A, ";
 			req = req + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_LEGUME + " B ";
@@ -87,6 +87,7 @@ public class SemisDao {
 		} 
 		return l;
 	}
+		
 	
 	public static BmSemisDao getSemis(int idLegume) throws JardinException {
 		try {
@@ -108,8 +109,8 @@ public class SemisDao {
 		return null;
 	}
 	
-	private static BmSemisMetier getBmSemis(ResultSet r) throws SQLException {
-		BmSemisMetier c = new BmSemisMetier();
+	private static BmMetierSemis getBmSemis(ResultSet r) throws SQLException {
+		BmMetierSemis c = new BmMetierSemis();
 		c.setIdLegume(r.getInt(CsteDao.COLUMN_ID_LEGUME));
 		c.setNom(r.getString(CsteDao.COLUMN_NOM));
 		c.setEspacementLigneCm(r.getInt(CsteDao.COLUMN_ESPACEMENT_LIGNE));

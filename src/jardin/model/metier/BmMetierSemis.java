@@ -2,10 +2,10 @@ package jardin.model.metier;
 
 import jardin.model.dao.BmSemisDao;
 
-public class BmSemisMetier extends BmSemisDao{
+public class BmMetierSemis extends BmSemisDao{
 	private String nom;
 
-	public BmSemisMetier() {
+	public BmMetierSemis() {
 		super();
 	}
 

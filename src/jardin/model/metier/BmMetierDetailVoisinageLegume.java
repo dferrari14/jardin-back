@@ -1,11 +1,11 @@
 package jardin.model.metier;
 
-public class BmDetailVoisinageLegumeMetier {
+public class BmMetierDetailVoisinageLegume {
 	private int idLegumeVoisinage;
 	private String nom;
 	private String description;
 	private String type;
-	public BmDetailVoisinageLegumeMetier() {
+	public BmMetierDetailVoisinageLegume() {
 		super();
 	}
 	public int getIdLegumeVoisinage() {

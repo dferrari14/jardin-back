@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import jardin.api.semis.SemisApi;
 import jardin.api.semis.SemisFactory;
 import jardin.model.dao.BmSemisDao;
-import jardin.model.metier.BmSemisMetier;
+import jardin.model.metier.BmMetierSemis;
 
 @Path("semis")
 public class ControllerSemis {
@@ -27,13 +27,13 @@ public class ControllerSemis {
 	
 	@POST
     @Produces(MediaType.APPLICATION_JSON)
-	public  Response insererSemis(BmSemisMetier b) {
+	public  Response insererSemis(BmMetierSemis b) {
 		return m.insererOuModifierSemis(b, true);
 	}
 	
 	@PUT
     @Produces(MediaType.APPLICATION_JSON)
-	public  Response ModifierSemis(BmSemisMetier b) {
+	public  Response ModifierSemis(BmMetierSemis b) {
 		return m.insererOuModifierSemis(b, false);
 	}
 	

@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -31,9 +33,26 @@ public class UtilsDate {
 			"39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49",
 			"50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60" };
 
-	private static final String[] tabLibelleMois = { "Janvier", "Février",
-			"Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre",
-			"Octobre", "Novembre", "Décembre" };
+	private static final String[] tabLibelleMois = { "Janvier", "Fevrier",
+			"Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre",
+			"Octobre", "Novembre", "Decembre" };
+	
+	
+	private static final Map<String, String> numeroMoisFromLibelle  = new HashMap<String, String>() {{
+	    put("janvier", "01");
+	    put("fevrier", "02");
+	    put("mars", "03");
+	    put("avril", "04");
+	    put("mai", "05");
+	    put("juin", "06");
+	    put("juillet", "07");
+	    put("aout", "08");
+	    put("septembre", "09");
+	    put("octobre", "10");
+	    put("novembre", "11");
+	    put("decembre", "12");
+	}};
+	
 
 	private static final String[] tabLibelleJours = { "lundi", "mardi",
 			"mercredi", "jeudi", "vendredi", "samedi", "dimanche" };
@@ -2454,6 +2473,47 @@ public class UtilsDate {
 		Calendar cal = new GregorianCalendar();
 		cal.setTime(date);
 		return getLibelleMois(cal);
+	}
+	
+	public static boolean isLibelleMois1AfterLibelleMois2(String mois1,String mois2) {
+		if(mois1.equalsIgnoreCase(mois2)){
+			return true;
+		}
+		
+		boolean res = false;
+		 
+		for(String m:tabLibelleMois) {
+			//si on trouve le mois1 on sort c qu'il arrive en premier et donc inferieur au mois 2 , res = false
+			 if(m.equals(mois1)) {
+				 break;
+			 }
+			 
+			 //si on trouve le mois2 en premier donc mois1 superieur au mois2 res = true
+			 if(m.equalsIgnoreCase(mois2)) {
+				 res = true;
+				 break;
+			 }	 
+		}
+		
+		return res;
+	}
+	
+	public static String getPremierJourMoisAAAAMMJJFromLibelleMois(String libMois) {
+		libMois = libMois.toLowerCase();
+		return getAAAA(new Date())+numeroMoisFromLibelle.get(libMois)+"01";
+	}
+	
+	public static String getDernierJourMoisAAAAMMJJFromLibelleMois(String libMois) {
+		libMois = libMois.toLowerCase();
+		String numMois = numeroMoisFromLibelle.get(libMois);
+		String d = "31";
+		if(numMois == "04" || numMois == "06" || numMois == "09" || numMois == "11") {
+			d ="30";
+		}else if(numMois == "02") {
+			d="28"; //on se fait pas chier avec les années bisextilles
+		}
+		
+		return getAAAA(new Date())+numMois+d;
 	}
 
 	/**

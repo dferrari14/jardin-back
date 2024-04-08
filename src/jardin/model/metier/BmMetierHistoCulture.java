@@ -2,10 +2,10 @@ package jardin.model.metier;
 
 import jardin.model.dao.BmHistoCultureDao;
 
-public class BmHistoCultureMetier extends BmHistoCultureDao{
+public class BmMetierHistoCulture extends BmHistoCultureDao{
 	private String nomLegume;    
 	
-	public BmHistoCultureMetier() {
+	public BmMetierHistoCulture() {
 		super();
 	}
 

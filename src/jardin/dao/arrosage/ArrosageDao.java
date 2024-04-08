@@ -60,7 +60,7 @@ public class ArrosageDao {
 			String req = "select * from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_ARROSAGE + " where "
 					+ CsteDao.COLUMN_ID_LEGUME + " = " + idLegume;
 			ResultSet r = UtilsDao.executeQuery(req);
-
+			
 			while (r.next()) {
 				return getBmArrosage(r);
 			}

@@ -1,8 +1,8 @@
 package jardin.model.dao;
 
-import jardin.model.metier.BmDetailVoisinageLegumeMetier;
+import jardin.model.metier.BmMetierDetailVoisinageLegume;
 
-public class BmVoisinageLegumeDao extends BmDetailVoisinageLegumeMetier {
+public class BmVoisinageLegumeDao extends BmMetierDetailVoisinageLegume {
 	private int idLegume;
 	 
 	

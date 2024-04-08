@@ -10,8 +10,8 @@ import jardin.constante.CsteDao;
 import jardin.dao.legume.LegumeDao;
 import jardin.model.dao.BmLegumeDao;
 import jardin.model.dao.BmVoisinageLegumeDao;
-import jardin.model.metier.BmDetailVoisinageLegumeMetier;
-import jardin.model.metier.BmVoisinageLegumeMetier;
+import jardin.model.metier.BmMetierDetailVoisinageLegume;
+import jardin.model.metier.BmMetierVoisinageLegume;
 import jardin.technique.JardinException;
 import jardin.technique.Utils;
 import jardin.technique.UtilsDao;
@@ -68,12 +68,12 @@ public class VoisinageLegumeDao {
 		return getListeVoisinageLegume(idLegume,CsteDao.COLUMN_TYPE_VOISINAGE_VALUE_KO);
 	}
 	
-	public static BmVoisinageLegumeMetier getListeVoisinageLegume(int idLegume) throws JardinException {
+	public static BmMetierVoisinageLegume getListeVoisinageLegume(int idLegume) throws JardinException {
 		List<BmVoisinageLegumeDao> l =  getListeVoisinageLegume(idLegume,null);
-		BmVoisinageLegumeMetier b = new BmVoisinageLegumeMetier();
+		BmMetierVoisinageLegume b = new BmMetierVoisinageLegume();
 		b.setIdLegume(idLegume);
 		for(BmVoisinageLegumeDao bv:l) {
-			BmDetailVoisinageLegumeMetier bdv = new BmDetailVoisinageLegumeMetier();
+			BmMetierDetailVoisinageLegume bdv = new BmMetierDetailVoisinageLegume();
 			bdv.setIdLegumeVoisinage(bv.getIdLegumeVoisinage());
 			bdv.setType(bv.getType());
 			bdv.setDescription(bv.getDescription());

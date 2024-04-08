@@ -4,6 +4,7 @@ public class BmHistoCultureDao {
 	private int idHisto;
 	private int idParcelle;
 	private int idLegume;
+	private String type;
 	private String encombrement; //complet ou demi culture
 	private String dateDebut;
 	private String dateFin; 
@@ -77,5 +78,15 @@ public class BmHistoCultureDao {
 	public void setEncombrement(String encombrement) {
 		this.encombrement = encombrement;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
 
 }

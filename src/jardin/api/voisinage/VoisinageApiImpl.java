@@ -10,8 +10,8 @@ import jardin.dao.voisinage.VoisinageLegumeDao;
 import jardin.metier.Controle;
 import jardin.model.dao.BmLegumeDao;
 import jardin.model.dao.BmVoisinageLegumeDao;
-import jardin.model.metier.BmDetailVoisinageLegumeMetier;
-import jardin.model.metier.BmVoisinageLegumeMetier;
+import jardin.model.metier.BmMetierDetailVoisinageLegume;
+import jardin.model.metier.BmMetierVoisinageLegume;
 import jardin.technique.JardinException;
 import jardin.technique.UtilsResponse;
 
@@ -75,10 +75,10 @@ public class VoisinageApiImpl extends UtilsResponse implements VoisinageApi {
 			List<BmLegumeDao> lLeg = LegumeDao.getListeLegumes(false);
 			List<BmLegumeDao> lLegRet = new ArrayList<BmLegumeDao>();
 			
-			BmVoisinageLegumeMetier b =VoisinageLegumeDao.getListeVoisinageLegume(idLegume);
+			BmMetierVoisinageLegume b =VoisinageLegumeDao.getListeVoisinageLegume(idLegume);
 			for(BmLegumeDao bld:lLeg) {
 				boolean trouve = false;
-				for(BmDetailVoisinageLegumeMetier bdvlg:b.getListeLegumeVoisinage()) {
+				for(BmMetierDetailVoisinageLegume bdvlg:b.getListeLegumeVoisinage()) {
 					if(bdvlg.getIdLegumeVoisinage() == bld.getIdLegume() || bld.getIdLegume() == idLegume) {
 						trouve = true;
 					}
