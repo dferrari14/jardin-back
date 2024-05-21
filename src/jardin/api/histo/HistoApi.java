@@ -14,4 +14,5 @@ public interface HistoApi {
 	public Response insererHistoNpkPh(BmHistoNpkPhDao b,boolean modif);
 	public Response getHistoNpkPh(int i,int dateReleve);
 	public Response getHistoCultureByIdHisto(int idHisto);
+	public Response supprimertHistoCultureByIdHisto(int idHisto);
 }

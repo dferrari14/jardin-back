@@ -27,6 +27,7 @@ public class Controle {
 	//histo culture
 	private static final String BEAN_HISTO_NULL = "bean histo null";
 	private static final String ID_PARCELLE_OBL = "id parcelle obl";
+	private static final String ID_HISTO_OBL = "id histo obl";
 	private static final String ID_LEGUME_OBL = "id legume obl";
 	private static final String DATE_DEBUT = "date debut histo";
 	private static final String DATE_FIN = "date fin histo";
@@ -83,6 +84,12 @@ public class Controle {
 		
 		if(b.getLongueur() == 0){
 			throw new JardinException(LONGUEUR_OBL);
+		}
+	}
+	
+	public static void controleHistoCulture(int  id) throws JardinException {
+		if(id == 0) {
+			throw new JardinException(ID_HISTO_OBL);
 		}
 	}
 	

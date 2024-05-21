@@ -1,5 +1,6 @@
 package jardin.controller;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -29,6 +30,14 @@ public class ControllerHistoCulture {
 	public  Response modifierHistoCulture(
 			BmHistoCultureDao b) {
 		return m.modifierHistoCulture(b);
+	}
+	
+	@Path("/{id}")
+	@DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+	public  Response supprimerHistoCulture(
+			@PathParam("id") int id) {
+		return m.supprimertHistoCultureByIdHisto(id);
 	}
 	
 	@Path("/{id}")

@@ -40,6 +40,20 @@ public class HistoCultureDao {
 			throw j;
 		}
 	}
+	
+	public static void deleteHistoCulture(int id) throws JardinException {
+		String req = "delete from " + CsteDao.DATABASE_NAME + "." + CsteDao.TABLE_HISTO_CULTURE;
+		req = req + " where " + CsteDao.COLUMN_ID_HISTO + " = " + id;
+		try {
+			UtilsDao.executeUpdateQuery(req);
+
+		} catch (SQLException s) {
+			JardinException j = new JardinException();
+			j.setMessage("Erreur delete HistoCulture,req : " + req);
+			j.setDetail(s.getMessage());
+			throw j;
+		}
+	}
 
 	public static void updateHistoCulture(BmHistoCultureDao b) throws JardinException {
 

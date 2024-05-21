@@ -66,10 +66,25 @@ public class HistoApiImpl  extends UtilsResponse implements  HistoApi{
 	@Override
 	public Response getHistoCultureByIdHisto(int idHisto) {
 		try {
+			Controle.controleHistoCulture(idHisto);
 			return buildResponse(HistoCultureDao.getHistoCultureByIdHisto(idHisto));
 		} catch (JardinException e) {
 			return buildResponse(e);
 		}	 
+	}
+
+	@Override
+	public Response supprimertHistoCultureByIdHisto(int idHisto) {
+		try {
+			Controle.controleHistoCulture(idHisto);
+		 
+			HistoCultureDao.deleteHistoCulture(idHisto);
+			 
+			return buildResponseUpdate();
+		}
+		catch (JardinException s) {
+			return buildResponse(s);
+		}
 	}
 
 	
